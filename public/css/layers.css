@@ -1,0 +1,6 @@
+/* ═══════════════════════════════════════════════════════════
+   layers.css — Aggregator (import segmented files)
+   ═══════════════════════════════════════════════════════════ */
+@import url('./layers/layers-core.css');
+@import url('./layers/layers-layout.css');
+@import url('./layers/layers-tree.css');

@@ -1,0 +1,300 @@
+# LUMIA — OpenAPI 3.1 minimal spec
+# V3.M5.B11
+#
+# Documenta i contratti pubblici stabili. Le rotte agenda/admin sono coperte da
+# pattern uniformi e non sono ancora elencate qui (TODO post-go-live).
+#
+# Convenzioni:
+# - Auth: cookie `session` (HttpOnly + SameSite=Strict). Login via POST /api/auth/login.
+# - CSRF: header `X-CSRF-Token` su tutti i metodi state-changing (POST/PUT/PATCH/DELETE).
+# - Versioning: `/api/v1/...` è alias di `/api/...` (V3.M5.B10).
+# - Errori: oggetto `{ error: { code, message } }` con HTTP status appropriato.
+
+openapi: 3.1.0
+info:
+  title: LUMIA Hematology Backend
+  version: "0.0.1"
+  description: |
+    Decision-support ematologico (diagnosi B-LPD, scores prognostici, terapie),
+    auth a sessione, audit log, agenda integrata.
+  license:
+    name: UNLICENSED
+servers:
+  - url: https://lumia.example.org/api
+    description: Production behind nginx + TLS
+  - url: http://127.0.0.1:3500/api
+    description: Local dev
+  - url: https://lumia.example.org/api/v1
+    description: Versioned alias (V3.M5.B10)
+
+tags:
+  - name: system
+  - name: auth
+  - name: diagnostic
+  - name: scores
+  - name: therapy
+  - name: admin
+
+paths:
+  /health:
+    get:
+      tags: [system]
+      summary: Liveness + engines available
+      security: []
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/HealthBase" } } } }
+
+  /health/lite:
+    get:
+      tags: [system]
+      summary: Minimal liveness probe
+      security: []
+      responses:
+        "200": { description: OK }
+
+  /health/deep:
+    get:
+      tags: [system]
+      summary: Readiness profondo (DB ping, ultimo backup, memoria)
+      description: Restituisce 503 se uno dei check fallisce. Esporre solo a IP fidati.
+      security: []
+      responses:
+        "200": { description: All checks ok }
+        "503": { description: A check failed }
+
+  /metrics:
+    get:
+      tags: [system]
+      summary: Metriche in formato Prometheus text v0.0.4
+      security: []
+      responses:
+        "200":
+          description: Prometheus exposition
+          content:
+            text/plain:
+              schema: { type: string }
+
+  /config:
+    get:
+      tags: [system]
+      summary: Public bootstrap config (host/port). Richiede sessione.
+      responses:
+        "200": { description: OK }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+
+  /auth/login:
+    post:
+      tags: [auth]
+      summary: Login a username/password
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username: { type: string }
+                password: { type: string, format: password }
+      responses:
+        "200":
+          description: Login ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  csrf_token: { type: string }
+                  expires_at: { type: string, format: date-time }
+                  must_change_password: { type: boolean }
+                  user: { $ref: "#/components/schemas/User" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "423": { description: Account bloccato per troppi tentativi falliti }
+        "429": { description: Rate-limit superato }
+
+  /auth/logout:
+    post:
+      tags: [auth]
+      summary: Logout (invalida la sessione corrente)
+      responses:
+        "200": { description: OK }
+
+  /auth/me:
+    get:
+      tags: [auth]
+      summary: Sessione corrente
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user: { $ref: "#/components/schemas/User" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+
+  /auth/change-password:
+    post:
+      tags: [auth]
+      summary: Cambio password (richiede vecchia password)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [old_password, new_password]
+              properties:
+                old_password: { type: string, format: password }
+                new_password: { type: string, format: password, minLength: 12 }
+      responses:
+        "200": { description: OK }
+        "400": { description: Vecchia password errata o nuova non conforme }
+
+  /diagnostic/{key}:
+    get:
+      tags: [diagnostic]
+      summary: Schema input per un engine diagnostico
+      parameters:
+        - { in: path, name: key, required: true, schema: { type: string } }
+      responses: { "200": { description: OK } }
+    post:
+      tags: [diagnostic]
+      summary: Esegue diagnosi
+      parameters:
+        - { in: path, name: key, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, properties: { selections: { type: object } } } } }
+      responses: { "200": { description: OK } }
+
+  /scores:
+    get:
+      tags: [scores]
+      summary: Catalogo scores disponibili
+      responses: { "200": { description: OK } }
+
+  /scores/{key}:
+    get:
+      tags: [scores]
+      parameters:
+        - { in: path, name: key, required: true, schema: { type: string } }
+      responses: { "200": { description: OK } }
+    post:
+      tags: [scores]
+      summary: Calcola score
+      parameters:
+        - { in: path, name: key, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object } } }
+      responses: { "200": { description: OK } }
+
+  /therapy:
+    get:
+      tags: [therapy]
+      responses: { "200": { description: OK } }
+
+  /therapy/{key}:
+    get:
+      tags: [therapy]
+      parameters:
+        - { in: path, name: key, required: true, schema: { type: string } }
+      responses: { "200": { description: OK } }
+    post:
+      tags: [therapy]
+      summary: Calcola raccomandazione terapeutica
+      parameters:
+        - { in: path, name: key, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object } } }
+      responses: { "200": { description: OK } }
+
+  /admin/utenti:
+    get:
+      tags: [admin]
+      summary: Lista utenti (paginata, V3.M5.B9)
+      parameters:
+        - { in: query, name: page, schema: { type: integer, minimum: 1 } }
+        - { in: query, name: page_size, schema: { type: integer, minimum: 1, maximum: 500 } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  utenti:
+                    type: array
+                    items: { $ref: "#/components/schemas/User" }
+                  page: { type: integer }
+                  page_size: { type: integer }
+                  total: { type: integer }
+                  total_pages: { type: integer }
+
+  /admin/audit-logs:
+    get:
+      tags: [admin]
+      summary: Audit log (paginato)
+      parameters:
+        - { in: query, name: page, schema: { type: integer } }
+        - { in: query, name: page_size, schema: { type: integer, maximum: 500 } }
+      responses: { "200": { description: OK } }
+
+components:
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: session
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    csrf:
+      type: apiKey
+      in: header
+      name: X-CSRF-Token
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id: { type: integer }
+        username: { type: string }
+        nome: { type: string, nullable: true }
+        cognome: { type: string, nullable: true }
+        ruolo: { type: string, enum: [admin, medico, infermiere, tecnico, amministrativo] }
+        email: { type: string, nullable: true, format: email, description: "Cifrato at-rest (V3.M4.A9), restituito in chiaro" }
+        attivo: { type: boolean }
+    HealthBase:
+      type: object
+      properties:
+        ok: { type: boolean }
+        service: { type: string }
+        version: { type: string }
+        uptime: { type: number }
+        engines: { type: object, additionalProperties: { type: boolean } }
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code: { type: string }
+            message: { type: string }
+
+  responses:
+    Unauthorized:
+      description: Sessione mancante o scaduta
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+
+security:
+  - sessionCookie: []
+    csrf: []

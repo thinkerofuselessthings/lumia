@@ -1,0 +1,25 @@
+{
+  "name": "lumia",
+  "version": "0.0.1",
+  "description": "LUMIA â€” Standalone hematology decision-support with REST/WebSocket API",
+  "main": "src/init.js",
+  "scripts": {
+    "start": "node src/init.js",
+    "dev": "node src/init.js --dev",
+    "backup": "node tools/backup.js",
+    "encrypt-existing": "node tools/encrypt-existing.js",
+    "reset-admin-password": "node tools/reset-admin-password.js",
+    "test:stress": "node tests/stress-test.js"
+  },
+  "keywords": [
+    "hematology",
+    "decision-support",
+    "diagnostic",
+    "therapy"
+  ],
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "sql.js": "*"
+  }
+}

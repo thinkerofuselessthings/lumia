@@ -1,0 +1,47 @@
+/* ══════════════════════════════════════════════════════
+   layers-tree.css — Submenu Tree Items
+   ══════════════════════════════════════════════════════ */
+
+.sidebar-tree-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 4px var(--space-md);
+  font-size: var(--font-size-sm);
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: background .12s ease;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+.sidebar-tree-item:hover { background: var(--surface-3); }
+.sidebar-tree-item.active {
+  background: var(--surface-3);
+  color: var(--gray-900);
+  font-weight: 600;
+}
+.sidebar-tree-item i { font-size: 14px; color: var(--gray-400); flex-shrink: 0; }
+.sidebar-tree-item.active i { color: var(--gray-700); }
+
+.sidebar-tree-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 6px var(--space-md) 2px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: var(--space-sm);
+}
+.sidebar-tree-header:first-child { margin-top: 0; }
+.sidebar-tree-header i { font-size: 12px; }
+
+.sidebar-tree-item--sub {
+  padding-left: calc(var(--space-md) + var(--space-md));
+  font-size: var(--font-size-xs);
+  color: var(--gray-500);
+}

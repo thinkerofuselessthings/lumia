@@ -1,0 +1,365 @@
+/* ══════════════════════════════════════════════════════════
+   lumia-launcher.css — Launcher modale grid (v2 layout)
+   Token: lumia-base.css
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Overlay backdrop ── */
+.launcher-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+  backdrop-filter: blur(3px);
+}
+
+.launcher-overlay.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Launcher container ── */
+.launcher {
+  display: flex;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  max-width: min(1200px, calc(100vw - 48px));
+  max-height: calc(100vh - 48px);
+  transform: translateY(-10px) scale(0.98);
+  transition: transform var(--transition-fast);
+}
+
+.launcher-overlay.is-open .launcher {
+  transform: translateY(0) scale(1);
+}
+
+/* ── Preview column (left) ── */
+.launcher-preview {
+  width: clamp(180px, 18vw, 260px);
+  flex-shrink: 0;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--gray-50);
+  border-right: 1px solid var(--border-color);
+  gap: var(--space-lg);
+}
+
+.launcher-preview-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.launcher-preview-icon {
+  color: var(--gray-400);
+  opacity: 0.4;
+}
+
+.launcher-preview-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+/* ── Preview actions (Close Layer, Library) ── */
+.launcher-preview-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.launcher-preview-action {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 12px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-md);
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.launcher-preview-action:hover {
+  background: var(--gray-100);
+  color: var(--gray-900);
+}
+
+.launcher-preview-action-icon {
+  display: flex;
+  align-items: center;
+  color: var(--gray-400);
+}
+
+/* ── Main menu area ── */
+.launcher-menu {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 840px;
+  overflow-y: auto;
+}
+
+/* ── Card grid ── */
+.launcher-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  align-content: start;
+}
+
+/* ── Single card (library .quick-module-button style) ──
+   Header (num + name) on top, colored icon in middle, desc at bottom. */
+.launcher-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  min-width: 0;
+  height: 140px;
+  padding: var(--space-sm);
+  background: var(--gray-50);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  font-family: inherit;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.launcher-card:hover {
+  background: #f5f5f5;
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.launcher-card:active {
+  background: #eee;
+}
+
+.launcher-card.is-selected:hover {
+  background: var(--gray-100);
+}
+
+.launcher-card.is-open {
+  opacity: 0.5;
+}
+
+.launcher-card.is-open:hover {
+  opacity: 0.7;
+}
+
+/* ── Card parts (library layout) ── */
+.launcher-card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.launcher-card-num {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--gray-400);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.launcher-card-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.launcher-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--gray-200);
+  color: var(--gray-700);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.launcher-card-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+}
+
+.launcher-card-desc {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: var(--gray-500);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Grid separator ── */
+.launcher-separator {
+  grid-column: 1 / -1;
+  height: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 2px 0;
+}
+
+/* ── Chevron indicator ── */
+.launcher-card-chevron {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: var(--gray-400);
+  opacity: 0;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.launcher-card:hover .launcher-card-chevron,
+.launcher-card.is-selected .launcher-card-chevron {
+  opacity: 1;
+}
+
+.launcher-card.is-expanded .launcher-card-chevron {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.launcher-card.is-expanded {
+  border-color: var(--accent);
+  background: var(--gray-100);
+}
+
+/* ── Subsections panel (right column) ── */
+.launcher-subs {
+  width: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-left: 0 solid var(--border-color);
+  background: var(--gray-50);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: width var(--transition-base), opacity 180ms ease, border-left-width 0ms 200ms;
+}
+
+.launcher-subs.is-open {
+  width: clamp(280px, 28vw, 400px);
+  opacity: 1;
+  border-left-width: 1px;
+  transition: width var(--transition-base), opacity 180ms 40ms ease, border-left-width 0ms;
+}
+
+.launcher-subs-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-md) 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--gray-400);
+}
+
+.launcher-subs-header svg {
+  flex-shrink: 0;
+}
+
+.launcher-subs-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── Sub-item ── */
+.launcher-sub-item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.launcher-sub-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  background: var(--gray-100);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--gray-300);
+  color: var(--gray-900);
+}
+
+.launcher-sub-item-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.launcher-sub-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.launcher-sub-item:hover {
+  background: var(--gray-100);
+}
+
+.launcher-sub-item.is-selected {
+  background: var(--gray-100);
+  border-color: var(--accent);
+}
+
+.launcher-sub-item-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-900);
+}
+
+.launcher-sub-item-desc {
+  font-size: 11px;
+  color: var(--gray-400);
+  line-height: 1.4;
+}

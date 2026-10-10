@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hemato.app · Landing</title>
+  <link rel="icon" type="image/svg+xml" href="/public/favicon.svg">
+  <link href="https://use.hugeicons.com/font/icons.css" rel="stylesheet">
+  <link href="./public/css/hemato-helpers.css" rel="stylesheet">
+  <style>
+    :root{ --bg:#fff; --fg:#111; --muted:#666; --line:#e9e9e9; --card:#fff; --shadow:rgba(0,0,0,.06); }
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{ margin:0; background:var(--bg); color:var(--fg); font:14px/1.4 Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif; display:flex; flex-direction:column; }
+    header.appbar{ height:56px; border-bottom:1px solid var(--line); background:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 16px; position:sticky; top:0; z-index:10; }
+    .brand{ display:flex; align-items:center; gap:8px; font-weight:700; letter-spacing:.3px; }
+    main{ flex:1; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .vmenu{ width:min(720px, 92vw); display:flex; flex-direction:column; gap:14px; }
+    .vitem{ display:flex; flex-direction:column; gap:6px; padding:14px 16px; border:1px solid var(--line); border-radius:14px; background:var(--card); box-shadow:0 1px 2px var(--shadow); cursor:pointer; transition:transform .12s ease, background .2s; }
+    .vitem:hover{ transform:translateY(-1px); background:#fafafa; }
+    .vtitle{ font-weight:600; display:flex; align-items:center; gap:10px; }
+    .vdesc{ color:var(--muted); font-size:13px; }
+    .overlay{ position:fixed; inset:0; background:rgba(0,0,0,.28); display:none; }
+    .modal{ position:fixed; inset:24px; background:#fff; border:1px solid var(--line); border-radius:16px; display:none; box-shadow:0 8px 30px rgba(0,0,0,.18); }
+    .modal.fullpage{ inset:0; border-radius:0; }
+    .modal.show, .overlay.show{ display:block; }
+    .modal .head{ height:54px; padding:0 16px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line);}
+    .modal .body{ height:calc(100% - 54px); display:flex; }
+    .side{ width:300px; border-right:1px solid var(--line); padding:12px; display:flex; flex-direction:column; gap:10px;}
+    .side input[type="search"]{ padding:8px 10px; border:1px solid var(--line); border-radius:10px; outline:none; }
+    .list{ flex:1; padding:16px; overflow:auto; display:flex; flex-direction:column; gap:16px; }
+    .list-group{ display:flex; flex-direction:column; gap:10px; }
+    .list-title{ font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+    .list-rows{ display:flex; flex-direction:column; gap:8px; }
+    .list-item{ border:1px solid var(--line); border-radius:12px; padding:12px 14px; background:#fff; display:flex; gap:12px; align-items:flex-start; cursor:pointer; transition:transform .12s ease, background .2s; text-align:left; }
+    .list-item:hover{ transform:translateY(-1px); background:#fafafa; }
+    .list-item .ctitle{ font-weight:600; display:block; }
+    .list-item .cdesc{ color:var(--muted); font-size:12px; }
+    .list-icon{ width:34px; height:34px; border:1px solid var(--line); border-radius:10px; display:flex; align-items:center; justify-content:center; background:#fff; flex:0 0 34px; }
+    .hgi-stroke{ font-size:18px; line-height:1; }
+    .hidden{ display:none !important; }
+    button.iconbtn{ border:1px solid var(--line); border-radius:10px; padding:6px 8px; background:#fff; cursor:pointer; display:flex; align-items:center; gap:6px; }
+    .pill{ border:1px solid var(--line); border-radius:999px; padding:2px 8px; background:#fafafa; font-size:12px; }
+  </style>
+</head>
+<body>
+  <header class="appbar">
+    <div class="brand"><i class="hgi-stroke hgi-activity-01"></i> <span>hemato.app</span></div>
+    <div class="right"><span class="pill">desktop</span></div>
+  </header>
+
+  <main>
+    <div class="vmenu">
+      <div class="vitem" id="btn-search">
+        <div class="vtitle"><i class="hgi-stroke hgi-search-01"></i> Ricerca paziente</div>
+        <div class="vdesc">Apri modulo di ricerca e gestione pazienti.</div>
+      </div>
+      <div class="vitem" id="btn-guidelines">
+        <div class="vtitle"><i class="hgi-stroke hgi-book-open-01"></i> Hemato Guidelines</div>
+        <div class="vdesc">Helper completo per diagnosi e indicazioni terapeutiche (selezione + filtro testuale).</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="overlay" id="ovA" data-layer="A"></div>
+  <section class="modal fullpage" id="modA" role="dialog" aria-label="Hemato Guidelines (chooser)" data-layer="A">
+    <div class="head">
+      <div class="brand"><i class="hgi-stroke hgi-book-open-01"></i> Seleziona helper</div>
+      <div class="actions" style="display:flex; gap:8px;">
+        <button class="iconbtn" id="closeA"><i class="hgi-stroke hgi-cancel-01"></i><span>Chiudi</span></button>
+      </div>
+    </div>
+    <div class="body">
+      <aside class="side">
+        <input id="gl-search" type="search" placeholder="Cerca helper...">
+        <div style="font-size:12px; color:var(--muted)">Suggerimenti: MM, MDS, CMML, AML, CLL, DLBCL, FL, MCL, CD B-LPD, Fitness FIL</div>
+      </aside>
+      <div class="list" id="gl-list"></div>
+    </div>
+  </section>
+
+  <div class="overlay" id="ovB" data-layer="B"></div>
+  <section class="modal" id="modB" role="dialog" aria-label="Helper" data-layer="B">
+    <div class="head">
+      <div class="brand" id="bTitle"><i class="hgi-stroke hgi-stethoscope"></i> <span>Helper</span></div>
+      <div class="actions" style="display:flex; gap:8px;">
+        <span id="bMeta" class="pill" style="display:none"></span>
+        <button class="iconbtn" id="closeB"><i class="hgi-stroke hgi-cancel-01"></i><span>Chiudi</span></button>
+      </div>
+    </div>
+    <div class="body" style="padding:0;">
+      <div id="bMount" style="flex:1; overflow:auto; width:100%; height:100%;"></div>
+    </div>
+  </section>
+
+  <script src="./app/utility/hemato-registry.js" defer></script>
+  <script src="./app/diagnostics/cd-b-lpd-helper.js" defer></script>
+  <script src="./app/diseases/cll/cll-therapy-helper.js" defer></script>
+  <script src="./app/diseases/dlbcl/dlbcl-therapy-helper.js" defer></script>
+  <script src="./app/diseases/fl/fl-therapy-helper.js" defer></script>
+  <script src="./app/diseases/mcl/mcl-therapy-helper.js" defer></script>
+
+  <script src="./app/diseases/mm/mm-therapy-helper.js" defer></script>
+  <script src="./app/diseases/mds/mds-helper.js" defer></script>
+  <script src="./app/diseases/cmml/cmml-helper.js" defer></script>
+  <script src="./app/diseases/aml/aml-helper.js" defer></script>
+  <script src="./app/utility/fitness/fil-fitness-helper.js" defer></script>
+
+  <script>
+    const Layer = { A: {ov:document.getElementById('ovA'), mod:document.getElementById('modA')},
+                    B: {ov:document.getElementById('ovB'), mod:document.getElementById('modB')} };
+    let zBase = 100;
+
+    // Safe z-index management for legacy <dialog> without MutationObserver loops
+    (function(){
+      const HDE = window.HTMLDialogElement;
+      if (HDE && HDE.prototype && HDE.prototype.showModal) {
+        const origShowModal = HDE.prototype.showModal;
+        HDE.prototype.showModal = function(...args){
+          const ret = origShowModal.apply(this, args);
+          zBase += 10;
+          this.style.zIndex = String(zBase+2);
+          this.addEventListener('cancel', (e)=>{ e.preventDefault(); });
+          return ret;
+        };
+      }
+    })();
+
+    function bringToFront(layer){
+      zBase += 10;
+      Layer[layer].ov.style.zIndex  = zBase;
+      Layer[layer].mod.style.zIndex = zBase+1;
+    }
+    function showLayer(layer){
+      bringToFront(layer);
+      Layer[layer].ov.classList.add('show');
+      Layer[layer].mod.classList.add('show');
+    }
+    function hideLayer(layer){
+      Layer[layer].ov.classList.remove('show');
+      Layer[layer].mod.classList.remove('show');
+      if(layer==='B') Layer.B.mod.classList.remove('fullpage');
+    }
+
+    const helpers = [
+      { id:'fil-fitness-helper', title:'FIL · Fitness',                desc:'Fit · Unfit · Frail (mini-calcolatore)',    type:'registry', group:'helper' },
+      { id:'cd-b-lpd', title:'CD‑Based B‑LPD Diagnostic',   desc:'Helper diagnostico immunofenotipico', type:'legacy',  group:'helper', open:()=>window.CDDiagnosticHelper?.open?.() },
+
+      { id:'mm-helper',       title:'Multiple Myeloma',                desc:'Rischio · 1L/RR · tossicità',             type:'registry', group:'percorso' },
+      { id:'mds-helper',      title:'Myelodysplastic Syndromes',       desc:'Rischio IPSS-R/M · strategie',             type:'registry', group:'percorso' },
+      { id:'cmml-helper',     title:'Chronic Myelomonocytic Leukemia', desc:'Classificazione · scelte terapeutiche',    type:'registry', group:'percorso' },
+      { id:'aml-helper',      title:'Acute Myeloid Leukemia',          desc:'ELN risk · induzione · HMA+VEN',            type:'registry', group:'percorso' },
+      { id:'cll',   title:'CLL · Assistente terapeutico',   desc:'Rischio · genetica · raccomandazioni', type:'legacy',  group:'percorso', open:()=>window.CLLTherapyHelper?.open?.() },
+      { id:'dlbcl', title:'DLBCL · Assistente terapeutico', desc:'Rischio · contesto · 1L/RR',           type:'legacy',  group:'percorso', open:()=>window.DLBCLTherapyHelper?.open?.() },
+      { id:'fl',    title:'FL · Assistente terapeutico',    desc:'GELF · score · linee',                  type:'legacy',  group:'percorso', open:()=>window.FLTherapyHelper?.open?.() },
+      { id:'mcl',   title:'MCL · Assistente terapeutico',   desc:'Score · regimi',                         type:'legacy',  group:'percorso', open:()=>window.MCLTherapyHelper?.open?.() }
+    ];
+
+    function $(s, r=document){ return r.querySelector(s); }
+    const helperIconMap = {
+      'fil-fitness-helper': 'hgi-dumbbell-01',
+      'cd-b-lpd': 'hgi-test-tube-01',
+      'mm-helper': 'hgi-blood',
+      'mds-helper': 'hgi-file-01',
+      'cmml-helper': 'hgi-dna',
+      'aml-helper': 'hgi-blood',
+      'cll': 'hgi-pill',
+      'dlbcl': 'hgi-shield-01',
+      'fl': 'hgi-activity-01',
+      'mcl': 'hgi-pulse-01'
+    };
+
+    function iconForHelper(h){
+      return helperIconMap[h.id] || (h.group==='helper' ? 'hgi-stethoscope' : 'hgi-clipboard');
+    }
+
+    function openChooser(){ showLayer('A'); renderList(); }
+    function closeChooser(){ hideLayer('A'); }
+
+    function renderList(filter=''){
+      const list = $('#gl-list'); list.innerHTML='';
+      const q = (filter||'').toLowerCase();
+      const filtered = helpers.filter(h => (h.title+' '+h.desc).toLowerCase().includes(q));
+
+      const groups = [
+        { key:'helper', title:'Helper' },
+        { key:'percorso', title:'Percorsi' }
+      ];
+
+      groups.forEach(g=>{
+        const items = filtered.filter(h=>h.group===g.key);
+        if(!items.length) return;
+        const group = document.createElement('div');
+        group.className = 'list-group';
+        const title = document.createElement('div');
+        title.className = 'list-title';
+        title.textContent = g.title;
+        const rows = document.createElement('div');
+        rows.className = 'list-rows';
+
+        items.forEach(h=>{
+          const item = document.createElement('button');
+          item.type = 'button';
+          item.className = 'list-item';
+          item.innerHTML = '<span class="list-icon"><i class="hgi-stroke '+iconForHelper(h)+'"></i></span>'+
+            '<span class="list-text"><span class="ctitle">'+h.title+'</span><span class="cdesc">'+h.desc+'</span></span>';
+          item.addEventListener('click', ()=> launchHelper(h));
+          rows.appendChild(item);
+        });
+
+        group.append(title, rows);
+        list.appendChild(group);
+      });
+
+      if(!list.children.length){
+        list.innerHTML = '<div class="cdesc">Nessun helper per la ricerca.</div>';
+      }
+    }
+
+    function openRegistryHelper(id){
+      const reg = window.HematoHelpersRegistry;
+      const h = reg?.byId?.[id];
+      if(!h){ alert('Helper non registrato: '+id); return; }
+      $('#bTitle').innerHTML = '<i class="hgi-stroke hgi-stethoscope"></i> <span>'+ (h.title||'Helper') +'</span>';
+      const meta = [];
+      if(h.version) meta.push(h.version);
+      if(h.tags && h.tags.length) meta.push(h.tags.join(' • '));
+      $('#bMeta').style.display = meta.length ? '' : 'none';
+      $('#bMeta').textContent = meta.join(' · ');
+      const mount = $('#bMount'); mount.innerHTML='';
+      Layer.B.mod.classList.add('fullpage');
+      showLayer('B');
+      h.mount(mount);
+    }
+
+    function launchHelper(h){
+      // Always keep A open behind
+      if(h.type==='registry'){ 
+        hideLayer('B');
+        openRegistryHelper(h.id);
+      } else {
+        // legacy: ensure B closed, then open their dialog on top
+        hideLayer('B');
+        h.open();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.getElementById('btn-guidelines').addEventListener('click', openChooser);
+      document.getElementById('closeA').addEventListener('click', closeChooser);
+      document.getElementById('closeB').addEventListener('click', ()=> hideLayer('B'));
+      document.getElementById('btn-search').addEventListener('click', ()=> alert('TODO: aprire ricerca paziente'));
+      document.getElementById('gl-search').addEventListener('input', (e)=> renderList(e.target.value));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMIA</title>
+  <meta name="description" content="LUMIA â€” Layered Unified Modular Interface Assistant">  <link rel="icon" type="image/svg+xml" href="/public/favicon.svg">  <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="/public/css/lumia-base.css">
+  <link rel="stylesheet" href="/public/css/lumia-icons.css">
+  <link rel="stylesheet" href="/public/css/lumia-global.css">
+  <link rel="stylesheet" href="/public/css/login.css">
+  <link rel="stylesheet" href="/public/css/loader.css">
+  <link rel="stylesheet" href="/public/css/tower-loader.css">
+</head>
+<body>
+
+<div class="login-page" id="login-page">
+  <div class="login-col login-col--left">
+    <div class="login-meta">
+      <span class="login-meta-version">LUMIA v0.0.1</span>
+      <span class="login-meta-item">Layered Unified Modular Interface Assistant</span>
+    </div>
+  </div>
+  <div class="login-col login-col--center">
+    <div class="login-card">
+      <div class="login-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M5.14286 14C4.41735 12.8082 4 11.4118 4 9.91886C4 5.54539 7.58172 2 12 2C16.4183 2 20 5.54539 20 9.91886C20 11.4118 19.5827 12.8082 18.8571 14" />
+            <path d="M7.38287 17.0982C7.291 16.8216 7.24507 16.6833 7.25042 16.5713C7.26174 16.3343 7.41114 16.1262 7.63157 16.0405C7.73579 16 7.88105 16 8.17157 16H15.8284C16.119 16 16.2642 16 16.3684 16.0405C16.5889 16.1262 16.7383 16.3343 16.7496 16.5713C16.7549 16.6833 16.709 16.8216 16.6171 17.0982C16.4473 17.6094 16.3624 17.8651 16.2315 18.072C15.9572 18.5056 15.5272 18.8167 15.0306 18.9408C14.7935 19 14.525 19 13.9881 19H10.0119C9.47495 19 9.2065 19 8.96944 18.9408C8.47283 18.8167 8.04281 18.5056 7.7685 18.072C7.63755 17.8651 7.55266 17.6094 7.38287 17.0982Z" />
+            <path d="M15 19L14.8707 19.6466C14.7293 20.3537 14.6586 20.7072 14.5001 20.9866C14.2552 21.4185 13.8582 21.7439 13.3866 21.8994C13.0816 22 12.7211 22 12 22C11.2789 22 10.9184 22 10.6134 21.8994C10.1418 21.7439 9.74484 21.4185 9.49987 20.9866C9.34144 20.7072 9.27073 20.3537 9.12932 19.6466L9 19" />
+            <path d="M8.25 9.75L10.5 12L10.5 16M8.25 10.5C8.66421 10.5 9 10.1642 9 9.75C9 9.33579 8.66421 9 8.25 9C7.83579 9 7.5 9.33579 7.5 9.75C7.5 10.1642 7.83579 10.5 8.25 10.5Z" />
+            <path d="M15.75 9.75L13.5 12L13.5 16M15.75 10.5C15.3358 10.5 15 10.1642 15 9.75C15 9.33579 15.3358 9 15.75 9C16.1642 9 16.5 9.33579 16.5 9.75C16.5 10.1642 16.1642 10.5 15.75 10.5Z" />
+        </svg>
+        <h1>LUMIA</h1>
+   
+      </div>
+      <form id="login-form" autocomplete="off">
+        <div class="login-field" id="login-step-user">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="currentColor" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 21.5001C16.3945 21.5001 17.0918 21.5001 17.6672 21.362C19.4955 20.923 20.9229 19.4956 21.3618 17.6673C21.5 17.0919 21.5 16.3946 21.5 15.0001M9 21.5001C7.60547 21.5001 6.90821 21.5001 6.33277 21.362C4.50453 20.923 3.07707 19.4956 2.63815 17.6673C2.5 17.0919 2.5 16.3946 2.5 15.0001M9 2.50012C7.60547 2.50012 6.90821 2.50012 6.33277 2.63827C4.50453 3.0772 3.07707 4.50465 2.63815 6.3329C2.5 6.90833 2.5 7.6056 2.5 9.00012M15 2.50012C16.3945 2.50012 17.0918 2.50012 17.6672 2.63827C19.4955 3.0772 20.9229 4.50465 21.3618 6.3329C21.5 6.90833 21.5 7.6056 21.5 9.00012" />
+            <path d="M15 9.5C15 7.84315 13.6569 6.5 12 6.5C10.3431 6.5 9 7.84315 9 9.5C9 11.1569 10.3431 12.5 12 12.5C13.6569 12.5 15 11.1569 15 9.5Z" />
+            <path d="M17 17.5C17 14.7386 14.7614 12.5 12 12.5C9.23858 12.5 7 14.7386 7 17.5" />
+          </svg>
+          <input type="text" id="login-user" placeholder="Username" autocomplete="username" required>
+        </div>
+        <div class="login-field hidden" id="login-step-pass">
+          <i class="hgi hgi-stroke hgi-lock-password"></i>
+          <input type="password" id="login-pass" placeholder="Password" autocomplete="current-password">
+          <button type="button" class="login-toggle-pass" id="toggle-pass" tabindex="-1" aria-label="Mostra password">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="currentColor" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 15L16.5 16.5" />
+              <path d="M16.9333 19.0252C16.3556 18.4475 16.3556 17.5109 16.9333 16.9333C17.5109 16.3556 18.4475 16.3556 19.0252 16.9333L21.0667 18.9748C21.6444 19.5525 21.6444 20.4891 21.0667 21.0667C20.4891 21.6444 19.5525 21.6444 18.9748 21.0667L16.9333 19.0252Z" />
+              <path d="M16.5 9.5C16.5 5.63401 13.366 2.5 9.5 2.5C5.63401 2.5 2.5 5.63401 2.5 9.5C2.5 13.366 5.63401 16.5 9.5 16.5C13.366 16.5 16.5 13.366 16.5 9.5Z" />
+            </svg>
+          </button>
+        </div>
+        <button type="submit" style="display:none"></button>
+      </form>
+    </div>
+  </div>
+  <div class="login-col login-col--right">
+    <div class="login-error hidden" id="login-error">
+      <svg class="login-error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13.9248 21H10.0752C5.44476 21 3.12955 21 2.27636 19.4939C1.42317 17.9879 2.60736 15.9914 4.97574 11.9985L6.90057 8.75333C9.17559 4.91778 10.3131 3 12 3C13.6869 3 14.8244 4.91777 17.0994 8.75332L19.0243 11.9985C21.3926 15.9914 22.5768 17.9879 21.7236 19.4939C20.8704 21 18.5552 21 13.9248 21Z"/>
+        <path d="M12 9V13"/>
+        <path d="M12.125 16.75H12M12.25 16.75C12.25 16.8881 12.1381 17 12 17C11.8619 17 11.75 16.8881 11.75 16.75C11.75 16.6119 11.8619 16.5 12 16.5C12.1381 16.5 12.25 16.6119 12.25 16.75Z"/>
+      </svg>
+      <span id="login-error-text"></span>
+    </div>
+  </div>
+
+  <!-- Firma -->
+  <div class="login-signature">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="currentColor" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M19 16V14C19 11.1716 19 9.75736 18.1213 8.87868C17.2426 8 15.8284 8 13 8H11C8.17157 8 6.75736 8 5.87868 8.87868C5 9.75736 5 11.1716 5 14V16C5 18.8284 5 20.2426 5.87868 21.1213C6.75736 22 8.17157 22 11 22H13C15.8284 22 17.2426 22 18.1213 21.1213C19 20.2426 19 18.8284 19 16Z" />
+      <path d="M19 18C20.4142 18 21.1213 18 21.5607 17.5607C22 17.1213 22 16.4142 22 15C22 13.5858 22 12.8787 21.5607 12.4393C21.1213 12 20.4142 12 19 12" />
+      <path d="M5 18C3.58579 18 2.87868 18 2.43934 17.5607C2 17.1213 2 16.4142 2 15C2 13.5858 2 12.8787 2.43934 12.4393C2.87868 12 3.58579 12 5 12" />
+      <path d="M13.5 3.5C13.5 4.32843 12.8284 5 12 5C11.1716 5 10.5 4.32843 10.5 3.5C10.5 2.67157 11.1716 2 12 2C12.8284 2 13.5 2.67157 13.5 3.5Z" />
+      <path d="M12 5V8" />
+      <path d="M9 13V14" />
+      <path d="M15 13V14" />
+      <path d="M10 17.5C10 17.5 10.6667 18 12 18C13.3333 18 14 17.5 14 17.5" />
+    </svg>
+    <span>thinkerofuselessthings</span>
+  </div>
+
+</div>
+
+<!-- Loader overlay (tower builder) -->
+<div class="tower-loader hidden" id="login-loader">
+  <main>
+    <div class="tower">
+      <div class="tower__group">
+        <div class="tower__brick-layer tower__brick-layer--4">
+          <div class="tower__brick tower__brick--0"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--90 tower__brick--red"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--180 tower__brick--orange"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--270 tower__brick--purple"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+        </div>
+        <div class="tower__brick-layer tower__brick-layer--3">
+          <div class="tower__brick tower__brick--45 tower__brick--magenta"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--135"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--225 tower__brick--green"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--315 tower__brick--orange"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+        </div>
+        <div class="tower__brick-layer tower__brick-layer--2">
+          <div class="tower__brick tower__brick--0 tower__brick--red"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--90 tower__brick--green"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--180 tower__brick--purple"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--270"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+        </div>
+        <div class="tower__brick-layer tower__brick-layer--1">
+          <div class="tower__brick tower__brick--45 tower__brick--purple"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--135 tower__brick--magenta"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--225 tower__brick--red"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--315 tower__brick--green"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+        </div>
+        <div class="tower__brick-layer">
+          <div class="tower__brick tower__brick--0 tower__brick--move14"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--90 tower__brick--red tower__brick--move13"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--180 tower__brick--orange tower__brick--move16"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--270 tower__brick--purple tower__brick--move15"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+        </div>
+        <div class="tower__brick-layer tower__brick-layer---1">
+          <div class="tower__brick tower__brick--45 tower__brick--move10 tower__brick--magenta"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--135 tower__brick--move9"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--225 tower__brick--green tower__brick--move12"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--315 tower__brick--orange tower__brick--move11"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+        </div>
+        <div class="tower__brick-layer tower__brick-layer---2">
+          <div class="tower__brick tower__brick--0 tower__brick--red tower__brick--move6"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--90 tower__brick--green tower__brick--move5"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--180 tower__brick--purple tower__brick--move8"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--270 tower__brick--move7"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+        </div>
+        <div class="tower__brick-layer tower__brick-layer---3">
+          <div class="tower__brick tower__brick--45 tower__brick--purple tower__brick--move2"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--135 tower__brick--magenta tower__brick--move1"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--225 tower__brick--red tower__brick--move4"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+          <div class="tower__brick tower__brick--315 tower__brick--green tower__brick--move3"><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-side"></div><div class="tower__brick-stud"></div><div class="tower__brick-stud"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="tower-message">
+      <p class="tower-message__line">Caricamento…</p>
+      <p class="tower-message__line">Preparando i mattoncini…</p>
+      <p class="tower-message__line">Assemblaggio in corso…</p>
+      <p class="tower-message__line">Seguendo le istruzioni…</p>
+      <p class="tower-message__line">Quasi pronto…</p>
+    </div>
+  </main>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+let loginStep = "user";
+let errorTimer = null;
+
+function showError(msg) {
+  clearError();
+  const el = $("#login-error");
+  $("#login-error-text").textContent = msg;
+  el.classList.remove("hidden", "is-fading");
+  errorTimer = setTimeout(() => {
+    el.classList.add("is-fading");
+    setTimeout(() => { el.classList.add("hidden"); el.classList.remove("is-fading"); }, 400);
+  }, 4000);
+}
+
+function clearError() {
+  if (errorTimer) { clearTimeout(errorTimer); errorTimer = null; }
+  const el = $("#login-error");
+  el.classList.add("hidden");
+  el.classList.remove("is-fading");
+}
+
+function showLoader() { $("#login-loader").classList.remove("hidden"); }
+function hideLoader() { $("#login-loader").classList.add("hidden"); }
+const MIN_LOADER = 2000;
+const delay = (ms) => new Promise(r => setTimeout(r, ms));
+
+async function apiPost(path, body) {
+  const res = await fetch(path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error?.message || "Errore");
+  return data;
+}
+
+async function handleStep1() {
+  const username = $("#login-user").value.trim();
+  if (!username) return;
+  clearError();
+  try {
+    const res = await apiPost("/api/auth/check-user", { username });
+    if (!res.exists) { showError("Utente non trovato"); return; }
+    loginStep = "pass";
+    $("#login-user").readOnly = true;
+    const passField = $("#login-step-pass");
+    passField.classList.remove("hidden");
+    passField.style.animation = "loginSlideDown 0.25s ease";
+    $("#login-pass").focus();
+  } catch (err) {
+    showError(err.message || "Errore di connessione");
+  }
+}
+
+async function handleStep2() {
+  const username = $("#login-user").value.trim();
+  const password = $("#login-pass").value;
+  if (!password) return;
+  clearError();
+  showLoader();
+  const t0 = Date.now();
+  try {
+    await apiPost("/api/auth/login", { username, password });
+    const wait = MIN_LOADER - (Date.now() - t0);
+    if (wait > 0) await delay(wait);
+    window.location.replace("/");
+  } catch (err) {
+    const wait = MIN_LOADER - (Date.now() - t0);
+    if (wait > 0) await delay(wait);
+    hideLoader();
+    showError(err.message || "Credenziali non valide");
+  }
+}
+
+$("#login-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (loginStep === "user") handleStep1();
+  else handleStep2();
+});
+
+// Toggle password visibility
+$("#toggle-pass").addEventListener("click", function() {
+  const passInput = $("#login-pass");
+  const isVisible = passInput.type === "text";
+  passInput.type = isVisible ? "password" : "text";
+  this.classList.toggle("is-active", !isVisible);
+  passInput.focus();
+});
+
+// If already authenticated (and not coming from logout), go straight to app
+if (!new URLSearchParams(window.location.search).has("logout")) {
+  fetch("/api/auth/check", { credentials: "same-origin" })
+    .then(r => { if (r.ok) window.location.replace("/"); })
+    .catch(() => {});
+}
+
+$("#login-user").focus();
+</script>
+
+</body>
+</html>

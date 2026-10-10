@@ -1,0 +1,42 @@
+/* ── Prestazioni container (shared) ─────────────────────────── */
+.prest-backdrop{display:none;position:fixed;inset:0;background:rgba(17,17,17,.45);z-index:400;justify-content:center;align-items:center}
+.prest-backdrop.active{display:flex}
+.prest-modal{background:var(--white);border-radius:var(--radius-md);width:92vw;max-width:860px;height:88vh;max-height:88vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg);animation:modalScaleIn .2s ease;overflow:hidden}
+.prest-header{padding:var(--sp-md) var(--sp-lg);display:flex;align-items:center;gap:var(--sp-md);border-bottom:1px solid var(--border-color);flex-shrink:0}
+.prest-header h2{flex:1;font-size:.95rem;font-weight:600}
+.prest-header-actions{display:flex;align-items:center;gap:var(--sp-sm)}
+.prest-header-actions button:disabled{opacity:.4;cursor:not-allowed}
+.prest-body{flex:1;overflow-y:auto;padding:var(--sp-lg)}
+/* Shared form elements for all prestazione modules */
+.prest-print-area{max-width:780px;margin:0 auto}
+.prest-title-block{text-align:center;margin-bottom:var(--sp-lg)}
+.prest-title{font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.prest-subtitle{font-size:.7rem;color:var(--gray-500)}
+.prest-fieldset{border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:var(--sp-sm) var(--sp-md) var(--sp-md);margin-bottom:var(--sp-md)}
+.prest-fieldset legend{font-weight:700;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-600);padding:0 var(--sp-xs)}
+.prest-row{display:flex;gap:var(--sp-sm);margin-bottom:var(--sp-sm)}
+.prest-row:last-child{margin-bottom:0}
+.prest-row.cols-1 .prest-field{flex:1}
+.prest-row.cols-2 .prest-field{flex:1}
+.prest-row.cols-3 .prest-field{flex:1}
+.prest-field{display:flex;flex-direction:column;gap:2px}
+.prest-field label{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--gray-500)}
+.prest-field input,.prest-field select,.prest-field textarea{border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:var(--sp-xs) var(--sp-sm);font-size:.8rem;font-family:inherit;outline:none;background:var(--white);color:var(--gray-900)}
+.prest-field input:focus,.prest-field select:focus,.prest-field textarea:focus{border-color:var(--gray-400);box-shadow:0 0 0 3px rgba(0,0,0,.05)}
+.prest-field textarea{resize:vertical;min-height:40px}
+.prest-checks{display:flex;gap:var(--sp-md);flex-wrap:wrap;padding-top:var(--sp-xs)}
+.prest-ck{display:flex;align-items:center;gap:4px;font-size:.75rem;color:var(--gray-700);cursor:pointer}
+.prest-ck input[type="checkbox"]{accent-color:var(--accent)}
+.prest-firma-box{height:48px;border:1px dashed var(--border-color);border-radius:var(--radius-sm);background:var(--gray-50)}
+/* Module buttons in appointment detail footer */
+.appt-detail-prest-btns{display:flex;gap:var(--sp-xs)}
+/* Sub-modal picker (shared) */
+.prest-picker-backdrop{display:none;position:fixed;inset:0;background:rgba(17,17,17,.3);z-index:500;justify-content:center;align-items:center}
+.prest-picker-backdrop.active{display:flex}
+.prest-picker{background:var(--white);border-radius:var(--radius-md);width:90vw;max-width:400px;box-shadow:var(--shadow-lg);animation:modalScaleIn .15s ease;overflow:hidden}
+.prest-picker-header{display:flex;align-items:center;padding:var(--sp-md) var(--sp-lg);border-bottom:1px solid var(--border-color)}
+.prest-picker-header h3{flex:1;font-size:.85rem;font-weight:600;margin:0}
+.prest-picker-body{padding:var(--sp-sm)}
+.prest-picker-item{display:block;width:100%;text-align:left;padding:var(--sp-sm) var(--sp-md);border:none;background:none;font-size:.82rem;font-family:inherit;color:var(--gray-800);cursor:pointer;border-radius:var(--radius-sm);transition:background .12s}
+.prest-picker-item:hover{background:var(--gray-100)}
+.prest-picker-empty{font-size:.75rem;color:var(--gray-400);text-align:center;padding:var(--sp-md)}

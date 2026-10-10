@@ -1,0 +1,62 @@
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   lumia-layer-system.css â€” LUMIA-specific layer UI components
+   Note: core layer types/animations are in layers.css (from Polyglobulia)
+   This file adds: header bar, close/action buttons, activity bar, empty state
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+/* â”€â”€ Sidebar layout for fullscreen layers â”€â”€ */
+.layer-content.layer-content--has-sidebar {
+  flex-direction: column;
+}
+.layer-content--has-sidebar > .layer-body {
+  flex: 1;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* layer-layout fills the body */
+.layer-content--has-sidebar .layer-layout {
+  flex: 1;
+  min-height: 0;
+}
+/* layer-main-content fills the main area */
+.layer-main-content {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  position: relative;
+}
+
+/* â”€â”€ Layer Header (modal / panel / sheet â€” horizontal bar) â”€â”€ */
+.layer-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 8px 24px;
+  border-bottom: 1px solid var(--line); flex-shrink: 0;
+  background: rgba(255,255,255,.62);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  min-height: 49px;
+}
+.layer-title { font-size: .875rem; font-weight: 600; color: var(--fg); margin: 0; }
+.layer-header-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+
+/* â”€â”€ Close & Action Buttons â”€â”€ */
+.layer-close-btn {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line); background: #fff; color: var(--muted);
+  border-radius: 4px; cursor: pointer; padding: 0; font-size: 16px; flex-shrink: 0;
+  transition: all 150ms ease;
+}
+.layer-close-btn:hover { color: var(--fg); background: #f5f5f5; }
+.layer-action-btn {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line); background: #fff; color: var(--muted);
+  border-radius: 4px; cursor: pointer; padding: 0; font-size: 16px; flex-shrink: 0;
+  transition: all 150ms ease;
+}
+.layer-action-btn:hover { color: var(--fg); background: #f5f5f5; }
+
+/* â”€â”€ Empty state â”€â”€ */
+.layer-empty { padding: 2rem; color: var(--muted); font-size: .85rem; text-align: center; }

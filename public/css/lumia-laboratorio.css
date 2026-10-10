@@ -1,0 +1,27 @@
+/* ── Laboratorio module ────────────────────────────────── */
+.lab-toolbar{display:flex;align-items:center;justify-content:space-between;padding:var(--sp-md) var(--sp-lg);border-bottom:1px solid var(--border-color);gap:var(--sp-md);flex-shrink:0}
+.lab-toolbar-left{display:flex;align-items:center;gap:var(--sp-sm)}
+.lab-toolbar-right{display:flex;align-items:center;gap:var(--sp-sm)}
+.lab-section-title{font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:.35rem;margin:0}
+.lab-section-title i{font-size:15px;color:var(--primary)}
+.lab-toolbar input[type="date"]{padding:4px 8px;border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:.78rem;font-family:inherit;background:var(--white)}
+.lab-list-area{flex:1;overflow-y:auto;padding:var(--sp-md) var(--sp-lg)}
+.lab-loading{text-align:center;padding:var(--sp-xl) 0;color:var(--muted);font-size:.82rem}
+.lab-empty{text-align:center;padding:var(--sp-xl) 0;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:var(--sp-sm)}
+.lab-empty p{font-size:.82rem;margin:0}
+@keyframes labSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.lab-spin{animation:labSpin 1s linear infinite;display:inline-block}
+
+/* Table */
+.lab-table{width:100%;border-collapse:collapse;font-size:.78rem}
+.lab-table thead{position:sticky;top:0;z-index:1}
+.lab-table th{text-align:left;font-weight:600;font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:6px 10px;border-bottom:2px solid var(--border-color);background:var(--white)}
+.lab-table td{padding:8px 10px;border-bottom:1px solid var(--border-color);vertical-align:top}
+.lab-table tbody tr:hover{background:var(--gray-50)}
+.lab-patient{font-weight:600}
+.lab-emo-cell{font-size:.75rem;line-height:1.5}
+.lab-traits{color:var(--muted);font-size:.68rem}
+.lab-status{display:inline-block;padding:2px 8px;border-radius:var(--radius-sm);font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.lab-st-draft{background:#fef3c7;color:#92400e}
+.lab-st-completed{background:#d1fae5;color:#065f46}
+.lab-st-cancelled{background:#fee2e2;color:#991b1b}

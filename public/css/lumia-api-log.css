@@ -1,0 +1,55 @@
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   lumia-api-log.css â€” Slide-in API monitor panel
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+.api-log-overlay {
+  position: fixed; right: 0; top: 0; bottom: 0; width: 420px; max-width: 90vw;
+  background: #fff; border-left: 1px solid var(--line);
+  z-index: 99999; transform: translateX(100%);
+  transition: transform 250ms ease;
+  display: flex; flex-direction: column;
+  box-shadow: -4px 0 24px rgba(0,0,0,.06);
+}
+.api-log-overlay.is-open { transform: translateX(0); }
+
+.api-log-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; border-bottom: 1px solid var(--line);
+  font-weight: 700; font-size: 13px;
+}
+
+.api-log-status {
+  display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 400;
+  padding: 8px 16px; border-bottom: 1px solid var(--line); background: #fafafa;
+}
+.api-log-status .dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #ccc;
+}
+.api-log-status .dot.online { background: #4caf50; }
+
+.api-log-list {
+  flex: 1; overflow: auto; padding: 8px;
+  display: flex; flex-direction: column-reverse; gap: 4px;
+}
+
+.api-log-entry {
+  padding: 8px 10px; border-radius: 8px; background: #f5f5f5;
+  font-size: 11px; font-family: 'SF Mono', Monaco, Consolas, monospace;
+  line-height: 1.5;
+}
+.api-log-entry .log-time   { color: var(--muted); }
+.api-log-entry .log-method { font-weight: 700; color: #1976d2; }
+.api-log-entry .log-method.ws { color: #e65100; }
+.api-log-entry .log-path   { color: #333; }
+.api-log-entry .log-result { color: #666; }
+
+.api-log-empty { padding: 2rem; text-align: center; color: var(--muted); font-size: 12px; }
+
+.api-key-box {
+  padding: 10px 16px; border-top: 1px solid var(--line); background: #fafafa;
+  font-size: 11px; font-family: 'SF Mono', Monaco, Consolas, monospace;
+  display: flex; align-items: center; gap: 8px; user-select: all;
+}
+.api-key-box .label {
+  font-weight: 700; color: var(--muted); font-family: Inter, sans-serif; user-select: none;
+}

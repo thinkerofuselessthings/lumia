@@ -1,0 +1,63 @@
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   lumia-global.css â€” LUMIA-specific overrides, animations,
+   utility classes.  Tokens & reset live in lumia-base.css.
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+/* â”€â”€ Body layout (flex column for appbar + main) â”€â”€ */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* â”€â”€ Animations (layer system) â”€â”€ */
+@keyframes layerFadeIn    { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalScaleIn   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalContentIn { from { opacity: 0; transform: scale(.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes panelSlideIn   { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes sheetSlideUp   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes shellSlideIn   { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* â”€â”€ LUMIA utility classes â”€â”€ */
+.hgi-stroke { font-size: 18px; line-height: 1; }
+button.iconbtn {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 6px 8px;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pill {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: #fafafa;
+  font-size: 12px;
+}
+
+/* â”€â”€ Session / Tab guard overlay â”€â”€ */
+.session-guard-overlay {
+  position: fixed; inset: 0; z-index: 99999;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(4px);
+  animation: layerFadeIn 200ms ease;
+}
+.session-guard-overlay.hidden { display: none !important; }
+.session-guard-box {
+  background: #fff; border-radius: 14px; padding: 2.2rem 2.5rem;
+  text-align: center; max-width: 360px; width: 90%;
+  box-shadow: 0 12px 40px rgba(0,0,0,.18);
+  animation: modalContentIn 250ms ease;
+}
+.session-guard-icon { font-size: 2.4rem; color: #e53e3e; display: block; margin-bottom: .8rem; }
+.session-guard-title { margin: 0 0 .5rem; font-size: 1.1rem; font-weight: 700; color: var(--fg); }
+.session-guard-msg { margin: 0 0 1.4rem; font-size: .82rem; color: var(--muted); line-height: 1.45; }
+.session-guard-btn {
+  border: none; background: var(--fg, #111); color: #fff; border-radius: 8px;
+  padding: .55rem 1.6rem; font-size: .82rem; font-weight: 600;
+  cursor: pointer; font-family: inherit; transition: opacity 120ms ease;
+}
+.session-guard-btn:hover { opacity: .85; }

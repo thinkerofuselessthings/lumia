@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMIA</title>
+  <meta name="description" content="LUMIA — Layered Unified Modular Interface Assistant">
+  <link rel="icon" type="image/svg+xml" href="/public/favicon.svg">
+  <link href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" rel="stylesheet">
+  <link href="./public/css/lumia-base.css" rel="stylesheet">
+  <link href="./public/css/lumia-icons.css" rel="stylesheet">
+  <link href="./public/css/lumia-helpers.css" rel="stylesheet">
+  <link href="./public/css/helpers.css" rel="stylesheet">
+  <link href="./public/css/lumia-global.css" rel="stylesheet">
+  <link href="./public/css/layers.css" rel="stylesheet">
+  <link href="./public/css/lumia-layer-system.css" rel="stylesheet">
+  <link href="./public/css/lumia-admin.css" rel="stylesheet">
+  <link href="./public/css/lumia-form-layer.css" rel="stylesheet">
+  <link href="./public/css/lumia-library-shell.css" rel="stylesheet">
+  <link href="./public/css/lumia-api-log.css" rel="stylesheet">
+  <link href="./public/css/lumia-agenda.css" rel="stylesheet">
+  <link href="./public/css/lumia-prestazioni.css" rel="stylesheet">
+  <link href="./app/prestazioni/trasfusione/trasfusione.css" rel="stylesheet">
+  <link href="./public/css/lumia-laboratorio.css" rel="stylesheet">
+  <link href="./public/css/lumia-tab-strip.css" rel="stylesheet">
+  <link href="./public/css/lumia-launcher.css" rel="stylesheet">
+  <link href="./public/css/lumia-section-panel.css" rel="stylesheet">
+  <link href="./public/css/loader.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- API Log data store (hidden overlay) -->
+  <div class="api-log-overlay" id="apiLogPanel">
+    <div class="api-log-header">
+      <span><i class="hgi-stroke hgi-dashboard-speed-01"></i> API Monitor</span>
+      <button class="iconbtn" id="closeApiLog"><i class="hgi-stroke hgi-cancel-01"></i></button>
+    </div>
+    <div class="api-log-status">
+      <span class="dot" id="apiDot"></span>
+      <span id="apiStatusText">Controllo connessione…</span>
+    </div>
+    <div class="api-log-list" id="apiLogList">
+      <div class="api-log-empty">Nessuna chiamata API registrata.</div>
+    </div>
+    <div class="api-key-box">
+      <span class="label">API Key:</span>
+      <span id="apiKeyDisplay">—</span>
+    </div>
+  </div>
+
+  <!-- Library Shell (3 columns — landing view) -->
+  <div class="library-shell" id="library-shell">
+
+    <!-- Col 1: Quick Launch -->
+    <div class="library-col library-col--launch">
+      <div class="library-col-title"><i class="hgi-stroke hgi-grid-view"></i> <span>Avvio rapido</span></div>
+      <div class="quick-launch-grid" id="quick-launch-grid">
+        <button class="quick-module-button" data-module="agenda">
+          <div class="quick-module-header">
+            <span class="quick-module-num">01</span>
+            <span class="quick-module-name">Agenda</span>
+          </div>
+          <div class="quick-module-icon"><i class="hgi-stroke hgi-calendar-03"></i></div>
+          <div class="quick-module-desc">Calendario e appuntamenti</div>
+        </button>
+        <button class="quick-module-button" data-module="laboratorio">
+          <div class="quick-module-header">
+            <span class="quick-module-num">02</span>
+            <span class="quick-module-name">Laboratorio</span>
+          </div>
+          <div class="quick-module-icon"><i class="hgi-stroke hgi-test-tube-01"></i></div>
+          <div class="quick-module-desc">Richieste, risultati e stampe</div>
+        </button>
+        <button class="quick-module-button" data-module="tools">
+          <div class="quick-module-header">
+            <span class="quick-module-num">03</span>
+            <span class="quick-module-name">Tools</span>
+          </div>
+          <div class="quick-module-icon"><i class="hgi-stroke hgi-stethoscope"></i></div>
+          <div class="quick-module-desc">Helper diagnostici e percorsi terapeutici</div>
+        </button>
+        <button class="quick-module-button" data-module="docs">
+          <div class="quick-module-header">
+            <span class="quick-module-num">04</span>
+            <span class="quick-module-name">Docs</span>
+          </div>
+          <div class="quick-module-icon"><i class="hgi-stroke hgi-book-open-01"></i></div>
+          <div class="quick-module-desc">API, catalogo e documentazione</div>
+        </button>
+        <button class="quick-module-button" data-module="user">
+          <div class="quick-module-header">
+            <span class="quick-module-num">05</span>
+            <span class="quick-module-name">User</span>
+          </div>
+          <div class="quick-module-icon"><i class="hgi-stroke hgi-user"></i></div>
+          <div class="quick-module-desc">Pannello personale</div>
+        </button>
+        <button class="quick-module-button quick-module-button--logout" id="btn-logout">
+          <div class="quick-module-header">
+            <span class="quick-module-num"></span>
+            <span class="quick-module-name">Logout</span>
+          </div>
+          <div class="quick-module-icon"><i class="hgi-stroke hgi-logout-03"></i></div>
+          <div class="quick-module-desc">Esci dalla sessione</div>
+        </button>
+        <button class="quick-module-button" data-module="admin" id="btn-admin" style="display:none">
+          <div class="quick-module-header">
+            <span class="quick-module-num">06</span>
+            <span class="quick-module-name">Admin</span>
+          </div>
+          <div class="quick-module-icon"><i class="hgi-stroke hgi-settings-02"></i></div>
+          <div class="quick-module-desc">Gestione app, utenti e log errori</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Col 2: Open Modules -->
+    <div class="library-col library-col--open">
+      <div class="library-col-title"><i class="hgi-stroke hgi-layers-01"></i> <span>Moduli aperti</span></div>
+      <div class="library-list" id="library-list">
+        <p class="text-xs text-muted" style="padding:0 .7rem">Nessun modulo aperto</p>
+      </div>
+    </div>
+
+    <!-- Col 3: Node Tree -->
+    <div class="library-col library-col--tree">
+      <div class="library-col-title"><i class="hgi-stroke hgi-node-edit"></i> <span>Albero nodi</span></div>
+      <div class="library-tree" id="library-tree">
+        <p class="text-xs text-muted" style="padding:0 .7rem">Nessun nodo attivo</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logout Loader -->
+  <div class="logout-loader hidden" id="logout-loader">
+    <div class="lumia-loader">
+      <div class="lightsaber ls-left ls-green"></div>
+      <div class="lightsaber ls-right ls-red"></div>
+      <div class="ls-particles ls-part-1"></div>
+      <div class="ls-particles ls-part-2"></div>
+      <div class="ls-particles ls-part-3"></div>
+      <div class="ls-particles ls-part-4"></div>
+      <div class="ls-particles ls-part-5"></div>
+    </div>
+  </div>
+
+  <!-- Session / Tab guard overlay -->
+  <div class="session-guard-overlay hidden" id="session-guard-overlay">
+    <div class="session-guard-box">
+      <i class="hgi-stroke hgi-alert-02 session-guard-icon"></i>
+      <h3 class="session-guard-title" id="session-guard-title">Sessione terminata</h3>
+      <p class="session-guard-msg" id="session-guard-msg">La sessione è stata chiusa da un altro terminale.</p>
+      <button class="session-guard-btn" id="session-guard-btn">Vai al login</button>
+    </div>
+  </div>
+
+  <!-- Layer Root — all layer nodes mount HERE -->
+  <div id="layerRoot"></div>
+
+  <!-- App Status Bar — always visible (above library + layers) -->
+  <div class="app-status-bar" id="appStatusBar">
+    <div class="app-status-app"><span class="app-status-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M5.14 14C4.42 12.81 4 11.41 4 9.92 4 5.55 7.58 2 12 2s8 3.55 8 7.92c0 1.49-.42 2.89-1.14 4.08"/><path d="M7.38 17.1c-.09-.28-.14-.42-.13-.53a.56.56 0 0 1 .38-.53C7.74 16 7.88 16 8.17 16h7.66c.29 0 .44 0 .54.04a.56.56 0 0 1 .38.53c0 .11-.05.25-.13.53-.17.51-.26.77-.39.97a1.62 1.62 0 0 1-1.2.87c-.24.06-.51.06-1.04.06h-3.98c-.54 0-.8 0-1.04-.06a1.62 1.62 0 0 1-1.2-.87c-.13-.2-.22-.46-.39-.97Z"/><path d="M15 19l-.13.65c-.14.71-.21 1.06-.37 1.34a1.62 1.62 0 0 1-1.11.91C13.08 22 12.72 22 12 22s-1.08 0-1.39-.1a1.62 1.62 0 0 1-1.11-.91c-.16-.28-.23-.63-.37-1.34L9 19"/></svg></span> LUMIA</div>
+    <div class="app-status-user"><span class="app-status-icon app-status-icon--user"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 2.5l1 0C16.74 2.5 18.86 2.5 20.18 3.82 21.5 5.14 21.5 7.26 21.5 11.5v1c0 4.24 0 6.36-1.32 7.68-1.32 1.32-3.44 1.32-7.68 1.32h-1c-4.24 0-6.36 0-7.68-1.32C2.5 18.86 2.5 16.74 2.5 12.5v-1c0-4.24 0-6.36 1.32-7.68C5.14 2.5 7.26 2.5 11.5 2.5Z"/><path d="M12 7.4a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Z"/><path d="M18.98 20.9C18.73 17.26 15.7 14.4 12 14.4s-6.73 2.87-6.98 6.5"/></svg></span> <span id="libraryUser"></span></div>
+    <div class="app-status-role"><span class="app-status-icon app-status-icon--role"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M8.5 18C10.31 16.05 13.67 15.95 15.5 18M13.94 12a1.95 1.95 0 1 1-3.9 0 1.95 1.95 0 0 1 3.9 0Z"/><path d="M9.5 4c-2.64.01-4.06.1-4.97.97C3.5 5.94 3.5 7.51 3.5 10.63v4.74c0 3.13 0 4.69 1.03 5.66 1.02.97 2.67.97 5.97.97h3c3.3 0 4.95 0 5.97-.97 1.03-.97 1.03-2.53 1.03-5.66v-4.74c0-3.13 0-4.69-1.03-5.66-.91-.87-2.33-.96-4.97-.97"/><path d="M9.77 3.63c.1-.41.14-.62.24-.79.21-.39.61-.68 1.08-.8C11.29 2 11.53 2 12 2s.71 0 .91.05c.47.11.87.4 1.08.8.1.17.14.38.24.79l.08.36c.17.74.26 1.1.13 1.39a.94.94 0 0 1-.41.45C13.75 6 13.33 6 12.5 6h-1c-.83 0-1.25 0-1.53-.17a.94.94 0 0 1-.41-.45c-.13-.28-.04-.65.13-1.39l.08-.36Z"/></svg></span> <span id="libraryRole"></span></div>
+    <div class="app-status-session"><span class="app-status-icon app-status-icon--session"><svg class="session-pie" id="sessionPie" viewBox="0 0 20 20" width="16" height="16"><circle cx="10" cy="10" r="5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="10"/><circle class="session-pie-arc" id="sessionPieArc" cx="10" cy="10" r="5" fill="none" stroke="#77BFA3" stroke-width="10" stroke-dasharray="31.42 31.42" stroke-dashoffset="0" transform="rotate(-90 10 10)"/></svg></span> <span class="session-pie-time" id="sessionPieText">60:00</span></div>
+  </div>
+
+  <!-- ── Chart.js (radar chart for CD diagnostics) ── -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+  <!-- ── Core (foundation, order matters) ── -->
+  <script src="./app/core/lumia-csrf.js" defer></script>
+  <script src="./app/core/layer-system.js" defer></script>
+  <script src="./app/core/lumia-api.js" defer></script>
+  <script src="./app/core/lumia-events.js" defer></script>
+  <script src="./app/core/lumia-scores.js" defer></script>
+  <script src="./app/utility/lumia-registry.js" defer></script>
+  <script src="./app/core/lumia-ui-factory.js" defer></script>
+  <script src="./app/core/lumia-molecular-panel.js" defer></script>
+  <script src="./app/core/lumia-toast.js" defer></script>
+  <script src="./app/core/lumia-tab-strip.js" defer></script>
+  <script src="./app/core/lumia-launcher.js" defer></script>
+  <script src="./app/core/lumia-a11y.js" defer></script>
+  <script src="./app/core/lumia-stepper.js" defer></script>
+  <script src="./app/core/lumia-export.js" defer></script>
+
+  <!-- ── Diagnostics (data → core → knowledge → ui) ── -->
+  <script src="./app/diagnostics/cd-b-lpd-data.js" defer></script>
+  <script src="./app/diagnostics/cd-b-lpd-core.js" defer></script>
+  <script src="./app/diagnostics/cd-b-lpd-knowledge.js" defer></script>
+  <script src="./app/diagnostics/cd-b-lpd-ui.js" defer></script>
+
+  <!-- ── Presets ── -->
+  <script src="./app/core/lumia-presets.js" defer></script>
+
+  <!-- ── Diseases: refactored (core → ui) ── -->
+  <script src="./app/diseases/cll/cll-therapy-core.js" defer></script>
+  <script src="./app/diseases/cll/cll-therapy-ui.js" defer></script>
+  <script src="./app/diseases/dlbcl/dlbcl-therapy-core.js" defer></script>
+  <script src="./app/diseases/dlbcl/dlbcl-therapy-ui.js" defer></script>
+  <script src="./app/diseases/fl/fl-therapy-core.js" defer></script>
+  <script src="./app/diseases/fl/fl-therapy-ui.js" defer></script>
+  <script src="./app/diseases/mcl/mcl-therapy-core.js" defer></script>
+  <script src="./app/diseases/mcl/mcl-therapy-ui.js" defer></script>
+
+  <!-- ── Diseases: skeleton (registry-based) ── -->
+  <script src="./app/diseases/mm/mm-therapy-helper.js" defer></script>
+  <script src="./app/diseases/mds/mds-helper.js" defer></script>
+  <script src="./app/diseases/cmml/cmml-helper.js" defer></script>
+  <script src="./app/diseases/aml/aml-helper.js" defer></script>
+  <script src="./app/utility/fitness/fil-fitness-data.js" defer></script>
+  <script src="./app/utility/fitness/fil-fitness-core.js" defer></script>
+  <script src="./app/utility/fitness/fil-fitness-ui.js" defer></script>
+  <script src="./app/utility/fitness/fil-fitness-helper.js" defer></script>
+
+  <!-- ── Bridge & Library (after all helpers) ── -->
+  <script src="./app/core/lumia-content-bridge.js" defer></script>
+  <script src="./app/core/lumia-library.js" defer></script>
+
+  <!-- ── Form Layer (generic modal forms) ── -->
+  <script src="./app/core/lumia-form-layer.js" defer></script>
+
+  <!-- ── Agenda module (template → config → toast → api → calendar → patients → wizard → scheduler → gestione → lists → elenco → main) ── -->
+  <script src="https://d3js.org/d3.v7.min.js" defer></script>
+  <script src="./app/agenda/ui/agenda-template.js" defer></script>
+  <script src="./app/agenda/ui/agenda-config.js" defer></script>
+  <script src="./app/agenda/ui/agenda-toast.js" defer></script>
+  <script src="./app/agenda/ui/agenda-api.js" defer></script>
+  <script src="./app/agenda/ui/agenda-calendar.js" defer></script>
+  <script src="./app/agenda/ui/agenda-patients.js" defer></script>
+  <script src="./app/agenda/ui/agenda-wizard.js" defer></script>
+  <script src="./app/agenda/ui/agenda-scheduler.js" defer></script>
+  <script src="./app/agenda/ui/agenda-gestione.js" defer></script>
+  <script src="./app/agenda/ui/agenda-lists.js" defer></script>
+  <script src="./app/agenda/ui/agenda-elenco.js" defer></script>
+  <script src="./app/agenda/ui/agenda-panoramica.js" defer></script>
+  <script src="./app/agenda/ui/agenda-main.js" defer></script>
+
+  <!-- ── Prestazioni modules ── -->
+  <script src="./app/prestazioni/registry.js" defer></script>
+  <script src="./app/prestazioni/prestazioni-container.js" defer></script>
+  <script src="./app/prestazioni/trasfusione/trasfusione-template.js" defer></script>
+  <script src="./app/prestazioni/trasfusione/trasfusione-logic.js" defer></script>
+
+  <!-- ── Shell (state → navigation → admin → modules → init → session-guard) ── -->
+  <script src="./app/shell/shell-state.js" defer></script>
+  <script src="./app/shell/shell-launcher.js" defer></script>
+  <script src="./app/shell/shell-navigation.js" defer></script>
+  <script src="./app/shell/shell-admin.js" defer></script>
+  <script src="./app/laboratorio/laboratorio.js" defer></script>
+  <script src="./app/shell/shell-modules.js" defer></script>
+  <script src="./app/shell/shell-change-password.js" defer></script>
+  <script src="./app/shell/shell-init.js" defer></script>
+  <script src="./app/shell/session-pie.js" defer></script>
+  <script src="./app/shell/shell-session-guard.js" defer></script>
+
+  <script>
+    /* Session guard — runs immediately, redirects if not authenticated */
+    fetch('/api/auth/check', { credentials: 'same-origin' })
+      .then(function(r) {
+        if (!r.ok) { window.location.replace('/login.html'); return null; }
+        return r.json();
+      })
+      .then(function(d) {
+        if (d && d.csrf_token) csrfToken = d.csrf_token;
+        if (d && d.user) {
+          window._currentUser = d.user;
+          if (d.user.ruolo === 'admin') {
+            var ab = document.getElementById('btn-admin');
+            if (ab) ab.style.display = '';
+          }
+          var uel = document.getElementById('libraryUser');
+          if (uel) uel.textContent = (d.user.nome || '') + ' ' + (d.user.cognome || '') + (d.user.username ? ' (' + d.user.username + ')' : '');
+          var rel = document.getElementById('libraryRole');
+          if (rel) rel.textContent = d.user.ruolo || '';
+        }
+        /* V3.M5: se la sessione richiede cambio password, mostra banner + apri modale */
+        if (window.LumiaChangePassword) {
+          window.LumiaChangePassword.attachRequiredFlow();
+        }
+      })
+      .catch(function() {});
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+table,id,patient_name,patient_id,motivo,extra
+list_entries,2,Manuale Senza UUID,MNLSZU88C44H501P,ORFANA_404,assegnato __legacy_unknown__
+list_entries,4,Primo Paziente,PRMPZ00A01H501A,ORFANA_404,assegnato __legacy_unknown__
+list_entries,5,Secondo Paziente,SCDPZ00A01H501B,ORFANA_404,assegnato __legacy_unknown__
+list_entries,7,Manuale Senza UUID,MNLSZU88C44H501P,ORFANA_404,assegnato __legacy_unknown__
+list_entries,8,Test Vuoti Entry,,ORFANA_NO_CF,assegnato __legacy_unknown__
+list_entries,10,Primo Paziente,,ORFANA_NO_CF,assegnato __legacy_unknown__
+list_entries,11,Secondo Paziente,,ORFANA_NO_CF,assegnato __legacy_unknown__
+list_entries,13,Manuale Test,MNLT00A01H501A,ORFANA_404,assegnato __legacy_unknown__
+list_entries,14,Empty Entry,,ORFANA_NO_CF,assegnato __legacy_unknown__
+list_entries,16,P1,,ORFANA_NO_CF,assegnato __legacy_unknown__
+list_entries,17,P2,,ORFANA_NO_CF,assegnato __legacy_unknown__

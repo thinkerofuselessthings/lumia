@@ -1,0 +1,5 @@
+/* ═══════════════════════════════════════════════════════════
+   helpers.css — Aggregator for domain-specific helper CSS
+   ═══════════════════════════════════════════════════════════ */
+@import url('./helpers/cd-diagnostic.css');
+@import url('./helpers/fil-fitness.css');

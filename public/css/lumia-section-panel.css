@@ -1,0 +1,156 @@
+/* ══════════════════════════════════════════════════════════
+   lumia-section-panel.css — Content panels + empty state (v2 layout)
+   Token: lumia-base.css
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Content area ── */
+.layer-layout-v2 .content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  background: var(--gray-50);
+}
+
+/* ── Section panel ──
+ * NOTE: !important è necessario perché alcuni moduli (es. admin) impostano
+ * inline `display:flex` sul pannello per layout interno; senza !important
+ * il pannello inattivo resterebbe visibile rompendo lo switch dei tab.
+ */
+.section-panel {
+  display: none !important;
+  padding: var(--space-2xl) 56px;
+  animation: sectionFadeIn var(--transition-base) ease;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.section-panel.is-active {
+  display: block !important;
+}
+
+.section-panel.is-active.is-flex {
+  display: flex !important;
+}
+
+@keyframes sectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-panel h1 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  margin-bottom: 6px;
+}
+
+.section-panel p {
+  color: var(--gray-500);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+/* ── Section cards ── */
+.section-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-md);
+  margin-top: 36px;
+}
+
+.section-card {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-lg);
+  min-height: 120px;
+  transition: box-shadow var(--transition-fast);
+}
+
+.section-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.section-card-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 14px;
+}
+
+.section-card-value {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+/* ── Empty state ── */
+.empty-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.empty-state-badge {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: var(--space-sm);
+}
+
+.empty-state-shortcut {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  color: var(--gray-500);
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.empty-state-shortcut:hover {
+  border-color: var(--gray-300);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.empty-state-shortcut kbd {
+  margin-left: 12px;
+  font-size: 11px;
+}
+
+.empty-state-hint {
+  font-size: 12px;
+  color: var(--gray-400);
+}
+
+/* ── KBD styling (within v2 layout) ── */
+.layer-layout-v2 kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  font-family: inherit;
+  font-size: 11px;
+  color: var(--gray-500);
+  background: var(--gray-100);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  line-height: 1.5;
+}

@@ -1,0 +1,11 @@
+{
+  "port": 3500,
+  "apiKey": "hk_98be39ff0b014276b8dfa5b79a5bc3d1",
+  "wsEnabled": true,
+  "cerus": {
+    "baseUrl": "http://localhost:3000",
+    "userId": "vmx1ur-7d2pbw-7assbo-xz0vt6-gox86a-0dxstg-bc7axm",
+    "userKey": "zmx2nb-fftvr7-pur9vt-jojmr0-31ow00-zbda0e-c1sc4e",
+    "timeout": 5000
+  }
+}

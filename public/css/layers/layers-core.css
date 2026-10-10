@@ -1,0 +1,190 @@
+/* ═══════════════════════════════════════════════════════════
+   layers-core.css — Layer Types, Content & Animations
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Layer Root (fullscreen overlay) ── */
+
+#layerRoot {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 500;
+}
+
+/* ── Base condivisa nodi ── */
+
+.layer-fullscreen,
+.layer-modal,
+.layer-panel,
+.layer-sheet {
+  position: fixed;
+  inset: 0;
+  pointer-events: auto;
+}
+
+/* ── Fullscreen ── */
+
+.layer-fullscreen {
+  background: var(--bg, var(--gray-50));
+  animation: layerFadeIn var(--layer-anim-base, 200ms) ease;
+  transition: opacity var(--layer-anim-base, 200ms) ease, box-shadow var(--layer-anim-base, 200ms) ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.layer-fullscreen:not(.is-active-layer) {
+  opacity: 0.45;
+  pointer-events: none;
+}
+.layer-fullscreen.is-active-layer {
+  opacity: 1;
+}
+.layer-fullscreen.is-background {
+  display: none;
+}
+
+.layer-fullscreen > .layer-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  border: none;
+  border-radius: 0;
+  background: var(--bg, var(--gray-50));
+}
+
+/* ── Modal ── */
+
+.layer-modal {
+  background: rgba(17, 17, 17, 0.35);
+  display: grid;
+  place-items: center;
+  padding: var(--space-md);
+  animation: modalScaleIn var(--layer-anim-base, 200ms) ease;
+}
+
+.layer-modal > .layer-content {
+  width: min(580px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalContentIn var(--layer-anim-slow, 280ms) ease;
+}
+
+/* ── Panel ── */
+
+.layer-panel {
+  inset: 0 0 0 auto;
+  width: min(520px, 90%);
+  background: var(--white);
+  border-left: 1px solid var(--border-color);
+  animation: panelSlideIn var(--layer-anim-base, 200ms) ease;
+  transition: opacity var(--layer-anim-base, 200ms) ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.layer-panel > .layer-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+}
+
+/* ── Sheet ── */
+
+.layer-sheet {
+  inset: auto 0 0 0;
+  top: 25%;
+  background: rgba(17, 17, 17, 0.25);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  animation: sheetSlideUp var(--layer-anim-base, 200ms) ease;
+}
+.layer-sheet > .layer-content {
+  width: min(720px, 100%);
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+  border-bottom: none;
+  max-height: 75vh;
+  overflow-y: auto;
+  animation: sheetContentUp var(--layer-anim-slow, 280ms) ease;
+}
+
+/* ── Layer Content ── */
+
+.layer-content {
+  background: var(--surface, var(--white));
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg, 0 8px 30px rgba(0,0,0,0.12));
+}
+
+.layer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-lg);
+}
+
+/* Fullscreen body needs no max constraint */
+.layer-fullscreen .layer-body {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Universal layout fills fullscreen body */
+.layer-fullscreen .layer-body > .layer-layout,
+.layer-fullscreen .layer-body > .layer-layout-v2 {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Modal: constrain body height */
+.layer-modal .layer-body {
+  max-height: calc(90vh - 60px);
+  overflow-y: auto;
+}
+
+/* Panel: fill vertical space */
+.layer-panel .layer-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ── Wide modal variant ── */
+.layer-content.layer-wide {
+  width: min(760px, 95%);
+}
+
+/* ── Animations ── */
+
+@keyframes layerFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes modalScaleIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes modalContentIn {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes panelSlideIn {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes sheetSlideUp {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes sheetContentUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}

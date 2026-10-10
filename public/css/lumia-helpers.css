@@ -1,0 +1,873 @@
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ *  lumia-helpers.css â€” Complete CSS for LUMIA Helper system
+ *  Allineato: Janus / ChemERA Design System (Flat White Minimalist)
+ *  Token source: guidelines/style.md
+ * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+/* â”€â”€ 1. Design tokens â”€â”€ */
+:root {
+  /* Gray scale */
+  --gray-50:  #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+
+  /* Structural */
+  --accent:       #1A1A1A;
+  --accent-light: #333333;
+  --white:        #FFFFFF;
+
+  /* Semantic */
+  --error:   #DC2626;
+  --success: #16A34A;
+  --yellow:  #FFAF20;
+
+  /* Helper-specific aliases */
+  --he-bg:      var(--white);
+  --he-fg:      var(--gray-900);
+  --he-muted:   var(--gray-500);
+  --he-line:    var(--gray-200);
+  --he-card:    var(--white);
+  --he-shadow:  0 8px 30px rgba(0,0,0,.18);
+
+  /* Spacing */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Borders */
+  --border-width:     1px;
+  --border-color:     var(--gray-200);
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+  --shadow-md: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-2xs: 0.625rem;   /* 10px */
+  --font-size-xs:  0.75rem;    /* 12px */
+  --font-size-sm:  0.85rem;    /* 13.6px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-lg:  1.15rem;    /* 18.4px */
+  --font-size-xl:  1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;     /* 24px */
+  --font-size-3xl: 2rem;       /* 32px */
+}
+
+/* â”€â”€ 2. Base & Reset â”€â”€ */
+body {
+  background: var(--he-bg);
+  color: var(--he-fg);
+  font-family: var(--font-family);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* â”€â”€ 3. Buttons â”€â”€ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.btn:hover { background: var(--gray-50); border-color: var(--gray-300); }
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
+.btn-primary:hover { background: var(--accent-light); }
+
+.btn-danger {
+  background: var(--error);
+  color: var(--white);
+  border-color: var(--error);
+}
+.btn-danger:hover { opacity: .9; }
+
+.btn-sm { padding: var(--space-xs) var(--space-sm); font-size: var(--font-size-xs); }
+
+.iconbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 6px 8px;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 10px;
+  background: var(--white);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.iconbtn:hover { background: var(--gray-50); border-color: var(--gray-300); }
+
+/* â”€â”€ 4. Layout primitives â”€â”€ */
+.row {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+.stack {
+  display: grid;
+  gap: 10px;
+}
+.grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* â”€â”€ 5. Card â”€â”€ */
+.card {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md);
+}
+.card h2 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+/* â”€â”€ 6. Tags / Chips / Badges â”€â”€ */
+.tag {
+  display: inline-block;
+  padding: 2px var(--space-sm);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 999px;
+  background: var(--gray-50);
+  font-size: var(--font-size-xs);
+  margin-right: var(--space-xs);
+  color: var(--gray-700);
+}
+
+.chip {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  border: var(--border-width) solid var(--border-color);
+  background: var(--gray-50);
+}
+.chip.pos { background: #E8F5E9; color: #2E7D32; border-color: #C8E6C9; }
+.chip.neg { background: #FCE4EC; color: #C62828; border-color: #F8BBD0; }
+.chip.dim { background: #FFF8E1; color: #E65100; border-color: #FFE0B2; }
+.chip.br  { background: #E3F2FD; color: #1565C0; border-color: #BBDEFB; }
+
+/* â”€â”€ 7. Form fields â”€â”€ */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.field label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+select,
+input[type="text"],
+input[type="number"],
+input[type="search"] {
+  padding: var(--space-sm) 10px;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 10px;
+  outline: none;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  background: var(--white);
+  color: var(--gray-900);
+  transition: border-color var(--transition-fast);
+}
+select:focus,
+input:focus {
+  border-color: var(--gray-400);
+}
+
+/* â”€â”€ 8. State grid (CD diagnostic) â”€â”€ */
+.state-grid {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+.state-grid .state {
+  padding: 6px 14px;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 10px;
+  background: var(--white);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+}
+.state-grid .state:hover { background: var(--gray-50); }
+.state-grid .state.active {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
+
+/* â”€â”€ 9. Separators â”€â”€ */
+.sep {
+  height: 1px;
+  background: var(--border-color);
+  margin: var(--space-sm) 0;
+}
+
+/* â”€â”€ 10. Muted text â”€â”€ */
+.muted { color: var(--he-muted); }
+
+/* â”€â”€ 11. Actions row â”€â”€ */
+.actions { margin-bottom: var(--space-md); }
+
+/* â”€â”€ 12. Dialogs â”€â”€ */
+dialog {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 16px;
+  padding: 0;
+  margin: auto;
+  width: min(1200px, 96vw);
+  height: min(90vh, 900px);
+  box-shadow: var(--he-shadow);
+  background: var(--white);
+}
+dialog::backdrop {
+  background: rgba(0,0,0,.28);
+}
+
+.app-head {
+  height: 54px;
+  padding: 0 var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 700;
+  color: var(--gray-900);
+}
+.app-body {
+  height: calc(100% - 54px);
+  padding: var(--space-md);
+  overflow: auto;
+}
+
+/* â”€â”€ 13. Results (diagnostic / therapy) â”€â”€ */
+.results-list .result-row {
+  display: grid;
+  grid-template-columns: 1fr 220px 48px;
+  gap: var(--space-sm);
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: var(--border-width) solid var(--gray-100);
+}
+.result-row .name {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+.result-row .bar {
+  height: 10px;
+  background: var(--gray-100);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.result-row .bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width var(--transition-base);
+}
+.result-row .score {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--gray-700);
+  text-align: right;
+}
+.result-row .meta {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  padding-top: 2px;
+}
+
+@media (max-width: 640px) {
+  .results-list .result-row {
+    grid-template-columns: 1fr 120px 40px;
+  }
+}
+
+/* â”€â”€ 14. Tables â”€â”€ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+table th {
+  text-align: left;
+  border-bottom: var(--border-width) solid var(--border-color);
+  padding: 6px;
+  font-weight: 600;
+  color: var(--gray-600);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+table td {
+  padding: 6px;
+  border-bottom: var(--border-width) solid var(--gray-100);
+  vertical-align: top;
+}
+table tbody tr:hover {
+  background: var(--gray-50);
+}
+.ghost td { color: var(--he-muted); font-style: italic; }
+
+/* â”€â”€ 15. Icons (HugeIcons) â”€â”€ */
+.hgi-stroke { font-size: 18px; line-height: 1; }
+
+/* â”€â”€ 16. LumiaUIFactory layout (.he-*) â”€â”€ */
+.he-root {
+  display: flex;
+  gap: var(--space-md);
+  min-height: 100%;
+  font-family: var(--font-family);
+  color: var(--he-fg);
+}
+.he-aside {
+  width: 64px;
+  flex: 0 0 64px;
+  border-right: var(--border-width) solid var(--border-color);
+  padding: var(--space-md);
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  max-height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.he-aside-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.he-aside-btn {
+  width: 36px;
+  height: 36px;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 10px;
+  background: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+.he-aside-btn:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-300);
+}
+
+.he-main {
+  flex: 1;
+  padding: var(--space-lg);
+  overflow: auto;
+}
+.he-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 var(--space-md) 0;
+  letter-spacing: .3px;
+  color: var(--gray-900);
+}
+.he-subtitle {
+  color: var(--he-muted);
+  margin-bottom: 10px;
+}
+.he-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+.he-tag {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 999px;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--gray-50);
+  font-size: var(--font-size-xs);
+  color: var(--gray-600);
+}
+.he-sections {
+  display: grid;
+  gap: 22px;
+}
+.he-card {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md);
+  background: var(--white);
+}
+.he-card-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin: 0 0 var(--space-sm) 0;
+  color: var(--gray-900);
+}
+.he-card-h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 14px 0 6px 0;
+  color: var(--gray-800);
+}
+.he-card-body {
+  color: var(--gray-700);
+  line-height: 1.6;
+}
+.he-card-body ul { margin: 0; padding-left: 18px; }
+.he-card-body li { margin-bottom: 4px; }
+
+.he-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-sm);
+}
+.he-table th {
+  text-align: left;
+  border-bottom: var(--border-width) solid var(--border-color);
+  padding: 6px;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+.he-table td {
+  padding: 6px;
+  border-bottom: var(--border-width) solid var(--gray-100);
+  vertical-align: top;
+}
+
+.he-refs {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px dashed var(--border-color);
+}
+.he-refs-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  color: var(--gray-800);
+}
+.he-refs-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--gray-600);
+  font-size: var(--font-size-sm);
+}
+.he-refs-list li { margin-bottom: 4px; }
+
+/* â”€â”€ 17. Responsive â”€â”€ */
+@media (max-width: 768px) {
+  .he-root { flex-direction: column; }
+  .he-aside {
+    width: 100%;
+    flex: none;
+    flex-direction: row;
+    border-right: none;
+    border-bottom: var(--border-width) solid var(--border-color);
+    position: static;
+    max-height: none;
+    padding: var(--space-sm);
+    overflow-x: auto;
+  }
+  .he-aside-nav { flex-direction: row; }
+  .he-main { padding: var(--space-md); }
+
+  dialog {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+
+/* â”€â”€ 18. Animations â”€â”€ */
+@keyframes he-fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.he-card {
+  animation: he-fadeIn var(--transition-slow) both;
+}
+.he-card:nth-child(2) { animation-delay: 50ms; }
+.he-card:nth-child(3) { animation-delay: 100ms; }
+.he-card:nth-child(4) { animation-delay: 150ms; }
+.he-card:nth-child(5) { animation-delay: 200ms; }
+
+/* â”€â”€ 19. Print â”€â”€ */
+@media print {
+  dialog { box-shadow: none; border: none; }
+  .he-aside { display: none; }
+  .he-card { break-inside: avoid; }
+  .btn, .iconbtn { display: none; }
+}
+
+/* â”€â”€ 20. Toast Notifications (Janus spec Â§11) â”€â”€ */
+.he-toast-container {
+  position: fixed;
+  bottom: 1.2rem;
+  right: 1.2rem;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+.he-toast {
+  background: #1e293b;
+  color: #f8fafc;
+  padding: 0.65rem 1.1rem;
+  border-radius: 10px;
+  font-family: var(--font-family);
+  font-size: 0.88rem;
+  max-width: 360px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  pointer-events: auto;
+  animation: he-toastIn 200ms ease;
+}
+.he-toast-warning { background: #92400e; color: #fef3c7; }
+.he-toast-error   { background: #dc2626; color: #fff; }
+.he-toast-success { background: #16a34a; color: #fff; }
+.he-toast-exit    { animation: he-toastOut 200ms ease forwards; }
+@keyframes he-toastIn  { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes he-toastOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(8px); } }
+
+/* â”€â”€ 21. Library Overlay â€” styles moved to index.html (library_style.md Â§4-6) â”€â”€ */
+/* Old .he-library-grid / .he-lib-card classes removed.
+   New classes: .library-overlay, .library-shell, .quick-launch-grid,
+   .quick-module-button, .library-list, .library-item â€” defined inline. */
+
+/* â”€â”€ 22. Stepper Wizard â”€â”€ */
+.he-stepper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  font-family: var(--font-family);
+}
+.he-stepper-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  justify-content: center;
+  padding: 0 var(--space-md);
+}
+.he-stepper-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+  position: relative;
+  font-family: var(--font-family);
+  transition: all var(--transition-base);
+}
+.he-stepper-dot[disabled] { cursor: not-allowed; opacity: .4; }
+.he-stepper-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  border: 2px solid var(--gray-300);
+  color: var(--gray-500);
+  background: var(--white);
+  transition: all var(--transition-base);
+}
+.he-stepper-dot.active .he-stepper-num {
+  border-color: var(--accent);
+  color: var(--white);
+  background: var(--accent);
+}
+.he-stepper-dot.done .he-stepper-num {
+  border-color: var(--success);
+  color: var(--white);
+  background: var(--success);
+}
+.he-stepper-label {
+  font-size: var(--font-size-2xs);
+  color: var(--gray-400);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  transition: color var(--transition-base);
+}
+.he-stepper-dot.active .he-stepper-label { color: var(--he-fg); }
+.he-stepper-dot.done   .he-stepper-label { color: var(--success); }
+.he-stepper-line {
+  flex: 1;
+  height: 2px;
+  min-width: 24px;
+  max-width: 80px;
+  background: var(--gray-200);
+  transition: background var(--transition-base);
+  align-self: flex-start;
+  margin-top: 24px; /* center with the num circle */
+}
+.he-stepper-line.done { background: var(--success); }
+.he-stepper-body {
+  flex: 1;
+  min-height: 120px;
+  animation: he-fadeIn var(--transition-slow) both;
+}
+.he-stepper-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: var(--border-width) solid var(--border-color);
+}
+.he-stepper-spacer { flex: 1; }
+
+/* â”€â”€ 23. Presets Panel â”€â”€ */
+.he-presets-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  padding: var(--space-sm) 0;
+}
+.he-preset-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--gray-700);
+  background: var(--gray-50);
+  border: var(--border-width) solid var(--gray-200);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+.he-preset-chip:hover  { background: var(--gray-100); border-color: var(--gray-300); }
+.he-preset-chip:active { background: var(--gray-200); }
+.he-preset-chip .he-preset-cat {
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  letter-spacing: .05em;
+}
+
+/* â”€â”€ 24. Export / Print enhancements â”€â”€ */
+.he-export-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+@media print {
+  /* Hide all chrome */
+  header.appbar, .overlay, .modal .head, .side, .he-stepper-footer,
+  .he-export-bar, .actions, .he-presets-bar, .he-toast-container,
+  .btn, .iconbtn, button { display: none !important; }
+
+  /* Show only content */
+  body { font-size: 11pt; color: #000; background: #fff; }
+  .modal, dialog {
+    position: static !important;
+    display: block !important;
+    box-shadow: none !important;
+    border: none !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  .modal .body, .app-body {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .he-aside { display: none !important; }
+  .he-card, .card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 1px solid #ccc;
+    box-shadow: none !important;
+  }
+  .result-row .bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}
+
+/* â”€â”€ 25. Accessibility / Screen Reader â”€â”€ */
+.he-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+/* Focus indicators (visible keyboard focus) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.state:focus-visible,
+.he-lib-card:focus-visible,
+.he-preset-chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(26, 26, 26, 0.12);
+}
+/* Remove outline for mouse clicks */
+:focus:not(:focus-visible) { outline: none; }
+
+/* â”€â”€ 27. Responsive completo (Phase 4) â”€â”€ */
+/* -- Small tablets (â‰¤768px) -- */
+@media (max-width: 768px) {
+  /* Layer A sidebar â†’ bottom bar */
+  .side {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--line, var(--border-color));
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    overflow-x: auto;
+    flex: none;
+    max-height: 56px;
+  }
+  .modal .body { flex-direction: column; }
+  .list { padding: var(--space-sm); }
+
+  /* Stepper dot labels hide */
+  .he-stepper-label { display: none; }
+  .he-stepper-line  { min-width: 16px; }
+
+  /* Card grid to 2 columns */
+  .he-library-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-sm); }
+
+  /* Dialog full viewport */
+  dialog {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Landing menu full width */
+  .vmenu { width: 100%; }
+}
+
+/* -- Mobile (â‰¤480px) -- */
+@media (max-width: 480px) {
+  /* Single column grid */
+  .he-library-grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr !important; }
+
+  /* Stack results */
+  .result-row { flex-direction: column; gap: 4px; }
+  .result-row .bar { order: 2; width: 100%; }
+  .result-row .score { order: 1; text-align: left; }
+
+  /* Larger tap targets */
+  .btn, .iconbtn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .state {
+    min-height: 44px;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  /* Stepper compact */
+  .he-stepper { padding: var(--space-sm); }
+  .he-stepper-num { width: 28px; height: 28px; font-size: var(--font-size-xs); }
+  .he-stepper-line { margin-top: 20px; }
+
+  /* Presets wrap */
+  .he-presets-bar { gap: 4px; }
+  .he-preset-chip { font-size: 10px; padding: 3px 8px; }
+
+  /* Header compact */
+  header.appbar { padding: 0 var(--space-sm); height: 48px; }
+  .brand { font-size: var(--font-size-sm); }
+}
+
+/* -- Landscape phone (short + wide) -- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .he-stepper-bar { padding: 0; }
+  .he-stepper-num { width: 24px; height: 24px; font-size: 10px; }
+  .he-stepper-label { display: none; }
+  .modal .head { height: 42px; }
+}
+
