@@ -1,0 +1,565 @@
+/* ───────────────────────────────────────
+   Lumia — Chromeless Flat White UI
+   No sidebar. No dock. Only tabs + palette.
+   ─────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #ffffff;
+  --bg-subtle: #fafafa;
+  --bg-hover: #f3f3f3;
+  --bg-active: #eeeeee;
+  --border: #e8e8e8;
+  --text: #1a1a1a;
+  --text-secondary: #888888;
+  --text-tertiary: #b0b0b0;
+  --accent: #1a1a1a;
+  --radius: 8px;
+  --radius-sm: 5px;
+  --tab-height: 42px;
+  --transition: 150ms ease;
+}
+
+html, body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  font-family: inherit;
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  line-height: 1.5;
+}
+
+/* ───────────────────────────────────────
+   App Shell — full viewport
+   ─────────────────────────────────────── */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ───────────────────────────────────────
+   Tab Strip — Chrome-style curved tabs
+   ─────────────────────────────────────── */
+
+.tab-strip {
+  flex-shrink: 0;
+  height: var(--tab-height);
+  background: var(--bg-hover);
+  display: flex;
+  align-items: flex-end;
+  user-select: none;
+  padding-top: 4px;
+}
+
+/* Generic strip button */
+.tab-strip-btn {
+  flex-shrink: 0;
+  width: 32px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  align-self: center;
+  transition: color var(--transition), background var(--transition);
+}
+
+.tab-strip-btn:hover {
+  color: var(--text);
+  background: var(--bg-active);
+}
+
+.tab-strip-dropdown {
+  margin-left: 8px;
+}
+
+.tab-strip-add {
+  margin-left: 2px;
+}
+
+.tab-strip-spacer {
+  flex: 1;
+}
+
+.tab-strip-close {
+  margin-right: 8px;
+}
+
+.tab-strip-close:hover {
+  color: #b81e1e;
+}
+
+.tab-strip-tabs {
+  display: flex;
+  align-items: flex-end;
+  overflow-x: auto;
+  scrollbar-width: none;
+  min-width: 0;
+  padding-left: 4px;
+  height: 100%;
+  gap: 4px;
+}
+
+.tab-strip-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tab items — Chrome style */
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  padding-right: 8px;
+  height: calc(100% - 4px);
+  font-size: 12px;
+  font-weight: 450;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--transition), background var(--transition);
+  position: relative;
+  max-width: 200px;
+}
+
+.tab:hover {
+  color: var(--text);
+  background: var(--bg-active);
+}
+
+/* Active tab — blends with content */
+.tab.is-active {
+  color: var(--text);
+  background: var(--bg-subtle);
+  z-index: 10;
+}
+
+/* Curved corners on active tab — radial gradient trick */
+.tab.is-active::before,
+.tab.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 8px;
+  height: 8px;
+  z-index: 10;
+}
+
+.tab.is-active::before {
+  left: -8px;
+  background: radial-gradient(circle at 0 0, transparent 8px, var(--bg-subtle) 8px);
+}
+
+.tab.is-active::after {
+  right: -8px;
+  background: radial-gradient(circle at 100% 0, transparent 8px, var(--bg-subtle) 8px);
+}
+
+.tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+  transition: color var(--transition);
+}
+
+.tab:hover .tab-icon,
+.tab.is-active .tab-icon {
+  color: var(--text-secondary);
+}
+
+.tab-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--transition), background var(--transition), color var(--transition);
+  font-size: 14px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tab:hover .tab-close,
+.tab.is-active .tab-close {
+  opacity: 1;
+}
+
+.tab-close:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--text);
+}
+
+/* ───────────────────────────────────────
+   Content — takes everything
+   ─────────────────────────────────────── */
+
+.content {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  background: var(--bg-subtle);
+}
+
+.section-panel {
+  display: none;
+  padding: 48px 56px;
+  animation: fadeIn 200ms ease;
+}
+
+.section-panel.is-active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.section-panel h1 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  margin-bottom: 6px;
+}
+
+.section-panel p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+/* Placeholder cards for demo */
+.section-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.section-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  min-height: 120px;
+  transition: box-shadow var(--transition);
+}
+
+.section-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.section-card-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 14px;
+}
+
+.section-card-value {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+/* ───────────────────────────────────────
+   Empty State — the onboarding
+   ─────────────────────────────────────── */
+
+.empty-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.empty-state-badge {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+
+.empty-state-shortcut {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.empty-state-shortcut:hover {
+  border-color: #ccc;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.empty-state-shortcut kbd {
+  margin-left: 12px;
+  font-size: 11px;
+}
+
+.empty-state-hint {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+/* ───────────────────────────────────────
+   Launcher Grid
+   ─────────────────────────────────────── */
+
+.launcher-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12vh;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+  backdrop-filter: blur(3px);
+}
+
+.launcher-overlay.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.launcher {
+  display: flex;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  transform: translateY(-10px) scale(0.98);
+  transition: transform 150ms ease;
+}
+
+.launcher-overlay.is-open .launcher {
+  transform: translateY(0) scale(1);
+}
+
+/* Left column — preview placeholder */
+.launcher-preview {
+  width: 260px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-subtle);
+  border-right: 1px solid var(--border);
+}
+
+.launcher-preview-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.launcher-preview-icon {
+  color: var(--text-tertiary);
+  opacity: 0.4;
+}
+
+.launcher-preview-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* Right column — menu */
+.launcher-menu {
+  flex: 1;
+  min-width: 0;
+}
+
+.launcher-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 150px);
+  gap: 10px;
+  padding: 16px;
+}
+
+.launcher-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  min-height: 130px;
+  background: var(--bg-subtle);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+  position: relative;
+}
+
+.launcher-card:hover {
+  background: var(--bg-hover);
+  border-color: var(--border);
+}
+
+.launcher-card.is-selected {
+  background: var(--bg-hover);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.launcher-card.is-open {
+  opacity: 0.45;
+}
+
+.launcher-card.is-open:hover {
+  opacity: 0.7;
+}
+
+.launcher-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.launcher-card-num {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0.5px;
+}
+
+.launcher-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.launcher-card-name {
+  font-size: 13px;
+  font-weight: 550;
+  color: var(--text);
+  letter-spacing: -0.1px;
+}
+
+.launcher-card-desc {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  line-height: 1.4;
+  margin-top: auto;
+}
+
+/* Separator between sections and actions */
+.launcher-separator {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+/* Default action cards — outline style */
+.launcher-card--action {
+  background: transparent;
+  border: 1px dashed var(--border);
+  min-height: 100px;
+}
+
+.launcher-card--action:hover {
+  background: var(--bg-hover);
+  border-style: solid;
+}
+
+.launcher-card--action.is-selected {
+  border-style: solid;
+}
+
+/* ───────────────────────────────────────
+   Scrollbar
+   ─────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ccc;
+}
+
+/* ───────────────────────────────────────
+   Selection
+   ─────────────────────────────────────── */
+
+::selection {
+  background: rgba(0, 0, 0, 0.08);
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumia</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- App shell — chromeless: only tab strip + content -->
+  <div class="app" id="app">
+
+    <!-- Tab strip — the ONLY persistent navigation -->
+    <div class="tab-strip" id="tabStrip">
+      <button class="tab-strip-btn tab-strip-dropdown" id="tabDropdownBtn" title="Open launcher  Ctrl+K">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
+      <div class="tab-strip-tabs" id="tabStripTabs">
+        <!-- Tabs injected by JS -->
+      </div>
+      <button class="tab-strip-btn tab-strip-add" id="openPaletteBtn" title="New tab  Ctrl+K">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+      </button>
+      <div class="tab-strip-spacer"></div>
+      <button class="tab-strip-btn tab-strip-close" id="tabCloseModuleBtn" title="Close module">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"/>
+          <path d="m6 6 12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Content area — full viewport -->
+    <div class="content" id="content">
+      <div class="empty-state" id="emptyState">
+        <div class="empty-state-badge">Lumia</div>
+        <div class="empty-state-shortcut" id="emptyStateTrigger">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.3-4.3"/>
+          </svg>
+          <span>Open a section...</span>
+          <kbd>Ctrl K</kbd>
+        </div>
+        <p class="empty-state-hint">Open the launcher to navigate anywhere</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Launcher Overlay -->
+  <div class="launcher-overlay" id="launcherOverlay">
+    <div class="launcher" id="launcher">
+      <div class="launcher-preview">
+        <div class="launcher-preview-content">
+          <svg class="launcher-preview-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18"/>
+            <path d="M9 21V9"/>
+          </svg>
+          <span class="launcher-preview-title">Sections</span>
+        </div>
+      </div>
+      <div class="launcher-menu">
+        <div class="launcher-grid" id="launcherGrid">
+          <!-- Cards injected by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
